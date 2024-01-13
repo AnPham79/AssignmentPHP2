@@ -7,6 +7,24 @@
     <li><a href="?url=page/contactPage">Liên hệ</a></li>
 </ul>
 
+<?php
+if (isset($_POST['search'])) {
+    $search = $_POST['search'];
+} else {
+    $search = '';
+}
+?>
+<br>
+<ul>
+    <li><a href="?url=product/selectCategory/1">Mô hình One Piece</a></li>
+    <li><a href="?url=product/selectCategory/2">Mô hình Naruto</a></li>
+</ul>
+<br>
+<form id="searchForm" action="?url=product/productPage&search=<?php echo urlencode($search) ?>" method="POST">
+    <input type="search" name="search" value="<?php echo $search ?>">
+    <button type="submit">Tìm kiếm</button>
+</form>
+
 <table border="1" width="100%">
     <tr>
         <td>#</td>
@@ -16,20 +34,20 @@
         <td>Danh mục</td>
         <td>Xuất sứ</td>
     </tr>
-    <?php if(isset($listProducts) && is_array($listProducts)) { ?>
+    <?php if (isset($listProducts) && is_array($listProducts)) { ?>
         <?php foreach ($listProducts as $each) { ?>
             <tr>
-                <td><?=$each['ma_sp']?></td>
+                <td><?= $each['ma_sp'] ?></td>
                 <td>
-                    <a href="?url=product/viewProduct/<?=$each['ma_sp']?>"><?=$each['ten_sp']?></a>
+                    <a href="?url=product/viewProduct/<?= $each['ma_sp'] ?>"><?= $each['ten_sp'] ?></a>
                 </td>
                 <td>
-                    <a href="?url=product/viewProduct/<?=$each['ma_sp']?>">
-                    <img src="<?=$each['anh_sp']?>" alt="" style="height:200px">
+                    <a href="?url=product/viewProduct/<?= $each['ma_sp'] ?>">
+                        <img src="<?= $each['anh_sp'] ?>" alt="" style="height:200px">
                 </td>
-                <td><?=$each['gia_sp']?></td>
-                <td><?=$each['FK_ten_danhmuc']?></td>
-                <td><?=$each['FK_noi_xuatxu']?></td>
+                <td><?= $each['gia_sp'] ?></td>
+                <td><?= $each['FK_ten_danhmuc'] ?></td>
+                <td><?= $each['FK_noi_xuatxu'] ?></td>
             </tr>
         <?php } ?>
     <?php } else { ?>
@@ -38,5 +56,3 @@
         </tr>
     <?php } ?>
 </table>
-
-
