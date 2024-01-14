@@ -7,10 +7,6 @@ class PageController extends CoreController
 
         $this->renderView('home');
     }
-    public function ProductPage()
-    {
-        $this->renderView('page_product');
-    }
     public function contactPage()
     {
         $this->renderView('page_contact');
@@ -22,5 +18,9 @@ class PageController extends CoreController
 
     public function adminPage() {
         $this->renderView('page_admin');
+    }
+
+    public function ViewCart() {
+        $this->renderView('page_cart');
     }
 }

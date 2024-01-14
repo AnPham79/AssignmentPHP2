@@ -14,6 +14,18 @@ if (isset($_POST['search'])) {
     $search = '';
 }
 ?>
+<?php
+$tongsoluong = 0;
+
+if (isset($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $soluong) {
+        $tongsoluong += $soluong['soluong'];
+    }
+}
+?>
+
+<a href="?url=page/ViewCart"><?php echo 'Tổng số lượng' . " " . $tongsoluong; ?></a>
+
 <br>
 <ul>
     <li><a href="?url=product/selectCategory/1">Mô hình One Piece</a></li>

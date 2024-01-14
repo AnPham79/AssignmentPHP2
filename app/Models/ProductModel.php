@@ -175,4 +175,100 @@ class ProductModel
     {
         return $this->conndb->pdo_execute("DELETE FROM sanpham WHERE ma_sp = ?", $ma_sp);
     }
+
+    // ------------------------------- Thao tác người dùng --------------------------------------
+    // ------------------------------- Thêm sản phẩm vào giỏ hàng -------------------------------
+    public function AddToCart($ma_sp)
+    {
+        if (empty($_SESSION['cart'][$ma_sp])) {
+            $sql = "SELECT * FROM sanpham 
+            Where ma_sp = '$ma_sp'";
+            $each = $this->conndb->pdo_query_one($sql);
+
+            $_SESSION['cart'][$ma_sp]['ten_sp'] = $each['ten_sp'];
+            $_SESSION['cart'][$ma_sp]['anh_sp'] = $each['anh_sp'];
+            $_SESSION['cart'][$ma_sp]['gia_sp'] = $each['gia_sp'];
+            $_SESSION['cart'][$ma_sp]['mota_sp'] = $each['mota_sp'];
+            $_SESSION['cart'][$ma_sp]['soluong'] = 1;
+        } else {
+            $_SESSION['cart'][$ma_sp]['soluong']++;
+        }
+    }
+
+    // -------------------------------- Thêm sản phẩm vào giỏ hàng trong chi tiết sản phẩm ----------
+    public function AddToCartInPrdDetail($ma_sp)
+    {
+        if (isset($_POST['soluong'])) {
+            $soluong = $_POST['soluong'];
+
+            if (empty($_SESSION['cart'][$ma_sp])) {
+                $sql = "SELECT * FROM sanpham 
+                Where ma_sp = '$ma_sp'";
+                $each = $this->conndb->pdo_query_one($sql);
+
+                $_SESSION['cart'][$ma_sp]['ten_sp'] = $each['ten_sp'];
+                $_SESSION['cart'][$ma_sp]['anh_sp'] = $each['anh_sp'];
+                $_SESSION['cart'][$ma_sp]['gia_sp'] = $each['gia_sp'];
+                $_SESSION['cart'][$ma_sp]['mota_sp'] = $each['mota_sp'];
+                $_SESSION['cart'][$ma_sp]['soluong'] = $soluong;
+            } else {
+                $_SESSION['cart'][$ma_sp]['soluong']++;
+            }
+        }
+    }
+
+    // ------------------------ comment -------------------------------
+    public function comment($tennguoibinhluan, $ngaybinhluan, $noidungbinhluan, $FK_ma_sp, $FK_ma_taikhoan)
+    {
+        $sql = "INSERT INTO binhluan (tennguoibinhluan, ngaybinhluan, noidungbinhluan, FK_ma_sp, FK_ma_taikhoan) 
+            VALUES ('$tennguoibinhluan', '$ngaybinhluan', '$noidungbinhluan', '$FK_ma_sp', '$FK_ma_taikhoan')";
+
+        $result = $this->conndb->pdo_execute($sql);
+        return $result;
+    }
+
+    // =-------------------- in bình luận ra theo tên --------------------------------
+    public function GetCommentByFKid($ma_sp)
+    {
+        $sql = "SELECT * FROM binhluan WHERE FK_ma_sp = '$ma_sp'";
+        $result = $this->conndb->pdo_query($sql);
+        return $result;
+    }
+
+    // // ---------------------- checkout -----------------------------------------------
+    // public function CheckOut()
+    // {
+    //     if (!isset($_SESSION['hovaten']) && !isset($_SESSION['email'])) {
+    //         header('location:?url=user/login');
+    //         exit();
+    //     }
+
+    //     $tennguoidung = $_SESSION['hovaten'] ?? '';
+    //     $diachinguoidung = $_SESSION['diachi'] ?? '';
+    //     $sdtnguoidung = $_SESSION['sodienthoai'] ?? '';
+    //     $emailnguoidung = $_SESSION['email'] ?? '';
+
+    //     $products = $_SESSION['cart'] ?? [];
+
+    //     $tongSoLuong = 0;
+    //     $tongTien = 0;
+
+    //     if (!empty($products)) {
+    //         foreach ($products as $ma_sp => $product) {
+    //             $ten_sp = $product['ten_sp'] ?? '';
+    //             $gia_sp = $product['gia_sp'] ?? 0;
+    //             $soLuong = $product['soluong'] ?? 0;
+
+    //             $tongSoLuong += $soLuong;
+
+    //             $thanhTien = @($gia_sp * $soLuong);
+    //             $tongTien += $thanhTien;
+
+    //             echo "Tên sản phẩm: $ten_sp | Số lượng: $soLuong | Thành tiền: $thanhTien VND<br>";
+    //         }
+    //     }
+
+    //     echo "Tổng số lượng: $tongSoLuong<br>";
+    //     echo "Tổng tiền: $tongTien VND<br>";
+    // }
 }

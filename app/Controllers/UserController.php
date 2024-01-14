@@ -15,7 +15,9 @@ class UserController extends CoreController
             $result = $this->user->login($_POST['email'], $_POST['matkhau']);
             if ($result) {
                 $_SESSION['user'] = $result;
+                $_SESSION['email'] = $result['email'];
                 $_SESSION['hovaten'] = $result['hovaten'];
+                $_SESSION['ma_tk'] = $result['ma_tk'];
                 $_SESSION['diachi'] = $result['diachi'];
                 $_SESSION['sodienthoai'] = $result['sodienthoai'];
                 $_SESSION['quyen'] = $result['quyen'];
@@ -39,8 +41,10 @@ class UserController extends CoreController
             $result = $this->user->register($_POST['hovaten'], $_POST['diachi'], $_POST['sodienthoai'], $_POST['email'], $_POST['matkhau']);
             if ($result) {
                 $_SESSION['user'] = $result;
+                $_SESSION['email'] = $result['email'];
                 $_SESSION['hovaten'] = $result['hovaten'];
                 $_SESSION['diachi'] = $result['diachi'];
+                $_SESSION['ma_tk'] = $result['ma_tk'];
                 $_SESSION['sodienthoai'] = $result['sodienthoai'];
                 $_SESSION['quyen'] = $result['quyen'];
                 header("Location:" . APPURL . '?url=user/login');
