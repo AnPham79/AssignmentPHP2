@@ -20,7 +20,7 @@ if (isset($_POST['search'])) {
     <li><a href="?url=product/selectCategory/2">Mô hình Naruto</a></li>
 </ul>
 <br>
-<form id="searchForm" action="?url=product/productPage&search=<?php echo urlencode($search) ?>" method="POST">
+<form id="searchForm" action="?url=product/productPage&search=<?php echo ($search) ?>" method="POST">
     <input type="search" name="search" value="<?php echo $search ?>">
     <button type="submit">Tìm kiếm</button>
 </form>
@@ -33,6 +33,7 @@ if (isset($_POST['search'])) {
         <td>Giá sản phẩm</td>
         <td>Danh mục</td>
         <td>Xuất sứ</td>
+        <td>Thêm vào giỏ</td>
     </tr>
     <?php if (isset($listProducts) && is_array($listProducts)) { ?>
         <?php foreach ($listProducts as $each) { ?>
@@ -48,6 +49,10 @@ if (isset($_POST['search'])) {
                 <td><?= $each['gia_sp'] ?></td>
                 <td><?= $each['FK_ten_danhmuc'] ?></td>
                 <td><?= $each['FK_noi_xuatxu'] ?></td>
+                <td>
+                    <a href="?url=product/AddToCart/<?= $each['ma_sp'] ?>">
+                    Thêm vào giỏ hàng</a>
+                </td>
             </tr>
         <?php } ?>
     <?php } else { ?>

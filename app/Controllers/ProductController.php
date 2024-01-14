@@ -3,6 +3,7 @@
 class ProductController extends CoreController
 {
     protected $product;
+    protected $params = [];
 
     public function __construct()
     {
@@ -12,9 +13,13 @@ class ProductController extends CoreController
     // ---------------------- Trang sản phẩm --------------------------------
     public function productPage()
     {
-        $data['listProducts'] = $this->product->getAllProducts();
+        $FK_ma_danhmuc = isset($this->params[0]) ? $this->params[0] : null;
+
+        $data['listProducts'] = $this->product->getAllProducts($FK_ma_danhmuc);
+
         $this->renderView('page_product', $data);
     }
+
 
     // ---------------------- chi tiết sản phẩm --------------------------------
     public function viewProduct($ma_sp)
@@ -25,10 +30,13 @@ class ProductController extends CoreController
     }
 
     // ---------------------------- Chọn sản phẩm theo danh mục -----------------------------
-    public function selectCategory($FK_ma_danhmuc) {
-        $data['product'] = $this->product->getAllProducts($FK_ma_danhmuc);
+    public function selectCategory($FK_ma_danhmuc)
+    {
+        $data['listProducts'] = $this->product->getAllProducts($FK_ma_danhmuc);
+
         $this->renderView('page_product', $data);
-    }    
+    }
+
 
     //-------------------------- CRUD cho sản phẩm --------------------------------
     // -------------------------- tới form tạo sản phẩm --------------------------------

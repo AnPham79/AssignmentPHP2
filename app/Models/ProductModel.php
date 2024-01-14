@@ -14,8 +14,9 @@ class ProductModel
     }
 
     // -------------------------------- lấy tất cả sản phẩm -------------------------------------
-    public function getAllProducts()
+    public function getAllProducts($FK_ma_danhmuc)
     {
+        var_dump($FK_ma_danhmuc);
         if (isset($_POST['search'])) {
             $search = $_POST['search'];
         } else {
@@ -30,32 +31,42 @@ class ProductModel
 
         $limit = 3;
 
-        if (isset($_GET['FK_ma_danhmuc'])) {
-            $FK_ma_danhmuc = $_GET['FK_ma_danhmuc'];
+        $output = '';
 
+        if ($FK_ma_danhmuc) {
             $sql_check = "SELECT COUNT(*) 
-            FROM 
-            sanpham 
+            FROM sanpham 
             WHERE FK_ma_danhmuc = '$FK_ma_danhmuc' 
-            AND ten_sp 
-            LIKE '%$search%'";
+            AND ten_sp LIKE '%$search%'";
+            var_dump($sql_check);
+            $totalRecords = $this->conndb->pdo_query_one($sql_check);
+            $getResult = $totalRecords['COUNT(*)'];
+            $num_page = ceil($getResult / $limit);
+            $offset = $limit * ($page - 1);
+
+            $sql = "SELECT sanpham.*, danhmuc.ten_danhmuc AS FK_ten_danhmuc, 
+                    xuatxu.noi_xuatxu AS FK_noi_xuatxu
+            FROM sanpham 
+            JOIN danhmuc ON sanpham.FK_ma_danhmuc = danhmuc.ma_danhmuc 
+            JOIN xuatxu ON sanpham.FK_ma_xuatxu = xuatxu.ma_xuatxu
+            WHERE sanpham.ten_sp LIKE '%$search%' AND FK_ma_danhmuc = '$FK_ma_danhmuc'
+            LIMIT $limit OFFSET $offset";
         } else {
             $sql_check = "SELECT COUNT(*) FROM sanpham";
-        }
-        $totalRecords = $this->conndb->pdo_query_one($sql_check);
-        $getResult = $totalRecords['COUNT(*)'];
-        $num_page = ceil($getResult / $limit);
-        $offset = $limit * ($page - 1);
+            var_dump($sql_check);
+            $totalRecords = $this->conndb->pdo_query_one($sql_check);
+            $getResult = $totalRecords['COUNT(*)'];
+            $num_page = ceil($getResult / $limit);
+            $offset = $limit * ($page - 1);
 
-        $sql = "SELECT sanpham.*, danhmuc.ten_danhmuc AS FK_ten_danhmuc, 
-                                xuatxu.noi_xuatxu AS FK_noi_xuatxu
+            $sql = "SELECT sanpham.*, danhmuc.ten_danhmuc AS FK_ten_danhmuc, 
+                    xuatxu.noi_xuatxu AS FK_noi_xuatxu
             FROM sanpham 
             JOIN danhmuc ON sanpham.FK_ma_danhmuc = danhmuc.ma_danhmuc 
             JOIN xuatxu ON sanpham.FK_ma_xuatxu = xuatxu.ma_xuatxu
             WHERE sanpham.ten_sp LIKE '%$search%'
             LIMIT $limit OFFSET $offset";
-
-        $output = '';
+        }
 
         if ($page > 1) {
             $output .= "<a href='?url=product/productPage&page=" . ($page - 1) . "'>Prev</a>";
@@ -76,7 +87,6 @@ class ProductModel
 
         return $this->conndb->pdo_query($sql);
     }
-
 
     // ------------------------------- Xem chi tiết sản phẩm tại mã --------------------------------
     public function viewProduct($ma_sp)
