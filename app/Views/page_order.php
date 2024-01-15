@@ -45,7 +45,7 @@
             </tbody>
         </table>
     <?php } ?>
-    <button type="submit"><a href="?action=Payment">Thanh toán ngay</a></button>
+    <button type="submit"><a href="?url=product/Payments">Thanh toán ngay</a></button>
 </body>
 
 </html>

@@ -207,4 +207,21 @@ class ProductController extends CoreController
 
         $this->renderView('page_order', $data);
     }
+
+    // ----------------------------- payments -----------------------------
+    public function Payments()
+    {
+        $result = $this->product->Payments(
+            $_SESSION['hovaten'],
+            $_SESSION['diachi'],
+            $_SESSION['sodienthoai'],
+            $_SESSION['email'],
+            $_SESSION['tongtien'],
+            $_SESSION['ma_tk'],
+        );
+        if ($result === true) {
+            // var_dump($result);
+            header("Location: " . APPURL . '?url=page/index');
+        }
+    }
 }

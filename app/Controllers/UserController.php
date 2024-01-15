@@ -19,6 +19,7 @@ class UserController extends CoreController
                 $_SESSION['hovaten'] = $result['hovaten'];
                 $_SESSION['ma_tk'] = $result['ma_tk'];
                 $_SESSION['diachi'] = $result['diachi'];
+                $_SESSION['matkhau'] = $result['matkhau'];
                 $_SESSION['sodienthoai'] = $result['sodienthoai'];
                 $_SESSION['quyen'] = $result['quyen'];
                 if ($result['quyen'] === 'user') {
@@ -45,6 +46,7 @@ class UserController extends CoreController
                 $_SESSION['hovaten'] = $result['hovaten'];
                 $_SESSION['diachi'] = $result['diachi'];
                 $_SESSION['ma_tk'] = $result['ma_tk'];
+                $_SESSION['matkhau'] = $result['matkhau'];
                 $_SESSION['sodienthoai'] = $result['sodienthoai'];
                 $_SESSION['quyen'] = $result['quyen'];
                 header("Location:" . APPURL . '?url=user/login');
@@ -59,7 +61,36 @@ class UserController extends CoreController
 
         session_destroy();
 
-        header("Location:" . APPURL . '../index.php');
+        header("Location:" . APPURL . '?url=page/index');
         exit();
+    }
+
+    // ------------------------- đổi mật khẩu ---------------------------------
+    public function editPass()
+    {
+        $this->renderView('editPass');
+    }
+
+    public function updatePass()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $result = $this->user->updatePass(
+                $_POST['matkhau'],
+                $_SESSION['ma_tk']
+            );
+        }
+
+        if ($result === true) {
+            header("Location:" . APPURL . '?url=page/index');
+        } else {
+            var_dump($result);
+        }
+    }
+
+    // ------------------------ public functions ------------------------
+    public function pageOrderHistory()
+    {
+        $data['orderHistory'] = $this->user->getAllOrder($_SESSION['ma_tk']);
+        $this->renderView('page_orderHistory', $data);
     }
 }

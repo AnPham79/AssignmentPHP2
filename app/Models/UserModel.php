@@ -38,4 +38,22 @@ class UserModel
         return $this->conndb->pdo_execute("INSERT INTO taikhoan (hovaten,diachi, sodienthoai, email, matkhau) 
         VALUES (?, ?, ?, ?, ?)", $hovaten, $diachi, $sodienthoai, $email, $matkhau);
     }
+
+    public function updatePass($matkhau, $ma_tk)
+    {
+        $sql = "UPDATE taikhoan
+            SET matkhau = ?
+            WHERE ma_tk = ?";
+
+        $params = [$matkhau, $ma_tk];
+
+        return $this->conndb->pdo_execute($sql, ...$params);
+    }
+
+    public function getAllOrder($ma_tk)
+    {
+        $sql = "SELECT * FROM donhang WHERE FK_ma_taikhoan = $ma_tk";
+
+        return $this->conndb->pdo_query($sql);
+    }
 }

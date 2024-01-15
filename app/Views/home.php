@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
     <!-- Bootstrap CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -19,6 +20,8 @@
                 $hovaten = $_SESSION['user']['hovaten'];
                 echo '<li class="list-inline-item">Xin chào ' . $hovaten . '</li>';
                 echo '<li class="list-inline-item"><a href="?url=user/logout" class="text-white">Đăng xuất</a></li>';
+                echo '<li class="list-inline-item"><a href="?url=user/pageOrderHistory" class="text-white">lịch sử mua hàng</a></li>';
+                echo '<a href="?url=user/editPass"><i class="bx bxs-cog" style="color:white;"></i></a>';
             } else {
                 echo '<li class="list-inline-item"><a href="?url=user/register" class="text-white">Đăng kí</a></li>';
                 echo '<li class="list-inline-item"><a href="?url=user/login" class="text-white">Đăng nhập</a></li>';

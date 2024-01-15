@@ -235,40 +235,29 @@ class ProductModel
         return $result;
     }
 
-    // // ---------------------- checkout -----------------------------------------------
-    // public function CheckOut()
-    // {
-    //     if (!isset($_SESSION['hovaten']) && !isset($_SESSION['email'])) {
-    //         header('location:?url=user/login');
-    //         exit();
-    //     }
+    // ------------------------ Thannh toán ---------------------------------------
+    public function Payments($tennguoidung, $diachinguoidung, $sdtnguoidung, $emailnguoidung, $tongtien, $FK_ma_taikhoan)
+    {
+        $products = $_SESSION['cart'] ?? [];
 
-    //     $tennguoidung = $_SESSION['hovaten'] ?? '';
-    //     $diachinguoidung = $_SESSION['diachi'] ?? '';
-    //     $sdtnguoidung = $_SESSION['sodienthoai'] ?? '';
-    //     $emailnguoidung = $_SESSION['email'] ?? '';
+        $sanpham_name = '';
+        $sanpham_quantity = '';
+        foreach ($products as $ma_sp => $product) {
+            $sanpham_name .= $product['ten_sp'] . " , ";
+            $sanpham_quantity .=  $product['soluong'] . " , ";
+        }
 
-    //     $products = $_SESSION['cart'] ?? [];
+        $sql = "INSERT INTO 
+        donhang(tennguoidung, diachinguoidung, sdtnguoidung, emailnguoidung, tensanpham, soluong , tongtien, FK_ma_taikhoan) 
+        VALUES
+        ('$tennguoidung', '$diachinguoidung', '$sdtnguoidung', '$emailnguoidung', '$sanpham_name','$sanpham_quantity', '$tongtien', '$FK_ma_taikhoan')";
 
-    //     $tongSoLuong = 0;
-    //     $tongTien = 0;
+        $result = $this->conndb->pdo_execute($sql);
 
-    //     if (!empty($products)) {
-    //         foreach ($products as $ma_sp => $product) {
-    //             $ten_sp = $product['ten_sp'] ?? '';
-    //             $gia_sp = $product['gia_sp'] ?? 0;
-    //             $soLuong = $product['soluong'] ?? 0;
+        if ($result) {
+            unset($_SESSION['cart']);
+        }
 
-    //             $tongSoLuong += $soLuong;
-
-    //             $thanhTien = @($gia_sp * $soLuong);
-    //             $tongTien += $thanhTien;
-
-    //             echo "Tên sản phẩm: $ten_sp | Số lượng: $soLuong | Thành tiền: $thanhTien VND<br>";
-    //         }
-    //     }
-
-    //     echo "Tổng số lượng: $tongSoLuong<br>";
-    //     echo "Tổng tiền: $tongTien VND<br>";
-    // }
+        return $result;
+    }
 }
