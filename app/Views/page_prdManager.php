@@ -5,7 +5,7 @@
     <li><a href="?url=product/viewPrdManager">Quản lí sản phẩm</a></li>
     <li><a href="?url=user/ViewUserManager">Quản lí tài khoản</a></li>
     <li><a href="?url=product/ViewCmtManager">Quản lí bình luận</a></li>
-    <li><a href="?url=product/ViewOrderManager">Quản lí hóa đơn</a></li>
+    <li><a href="?url=product/getAllOrderAdmin">Quản lí hóa đơn</a></li>
 </ul>
 <br>
 <a href="?url=product/createPrd">Thêm sản phẩm</a>
@@ -40,11 +40,10 @@ if (isset($_POST['search'])) {
             <tr>
                 <td><?= $each['ma_sp'] ?></td>
                 <td>
-                    <a href="?url=product/viewProduct/<?= $each['ma_sp'] ?>"><?= $each['ten_sp'] ?></a>
+                    <?= $each['ten_sp'] ?></a>
                 </td>
                 <td>
-                    <a href="?url=product/viewProduct/<?= $each['ma_sp'] ?>">
-                        <img src="<?= $each['anh_sp'] ?>" alt="" style="height:200px">
+                <img src="<?= $each['anh_sp'] ?>" alt="" style="height:200px">    
                 </td>
                 <td><?= $each['gia_sp'] ?></td>
                 <td><?= $each['FK_ten_danhmuc'] ?></td>

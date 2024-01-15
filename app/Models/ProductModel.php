@@ -260,4 +260,50 @@ class ProductModel
 
         return $result;
     }
+
+    // -------------------------------- quản lí sản phẩm admin -----------------------------
+    public function getAllPrdByAdmin()
+    {
+        return $this->conndb->pdo_query("SELECT sanpham.*, danhmuc.ten_danhmuc AS FK_ten_danhmuc, 
+        xuatxu.noi_xuatxu AS FK_noi_xuatxu
+        FROM sanpham 
+        JOIN danhmuc ON sanpham.FK_ma_danhmuc = danhmuc.ma_danhmuc 
+        JOIN xuatxu ON sanpham.FK_ma_xuatxu = xuatxu.ma_xuatxu");
+    }
+
+    // ---------------------------------- quản lí hóa đơn -------------------------------------
+    public function getAllOrderAdmin()
+    {
+        return $this->conndb->pdo_query("SELECT * FROM donhang");
+    }
+
+    // ----------------------------- thây đổi trạng thái ----------------------------------
+    public function changeStatus($trangthai, $ma_donhang)
+    {
+        return $this->conndb->pdo_execute("UPDATE donhang SET trangthai = '$trangthai' WHERE ma_donhang = '$ma_donhang'");
+    }
+
+    // ----------------------------- hủy đơn hàng ------------------------------------------
+    public function cancelOrder($trangthai, $ma_donhang)
+    {
+        return $this->conndb->pdo_execute("UPDATE donhang 
+        SET trangthai = '$trangthai' 
+        WHERE ma_donhang = '$ma_donhang'");
+    }
+
+    // ============================= sử dụng voucher ----------------------------------
+    public function VoucherAxist($ten_voucher)
+    {
+        $sql = "SELECT COUNT(*) FROM voucher WHERE ten_voucher = ?";
+        $count = $this->conndb->pdo_query_value($sql, $ten_voucher);
+        return $count > 0;
+    }
+
+    public function UseVoucher($ten_voucher)
+    {
+        if ($this->VoucherAxist($ten_voucher)) {
+            return $this->conndb->pdo_query_one("SELECT * FROM voucher WHERE ten_voucher = ?", $ten_voucher);
+        }
+        return false;
+    }
 }

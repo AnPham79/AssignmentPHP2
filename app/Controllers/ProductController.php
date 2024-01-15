@@ -102,7 +102,7 @@ class ProductController extends CoreController
     // ----------------------------- xem quản lí sản phẩm --------------------------------
     public function viewPrdManager()
     {
-        $data['listAllPrd'] = $this->product->getAllProducts();
+        $data['listAllPrd'] = $this->product->getAllPrdByAdmin();
         $this->renderView('page_prdManager', $data);
     }
 
@@ -184,6 +184,9 @@ class ProductController extends CoreController
         $tongSoLuong = 0;
         $tongTien = 0;
 
+        // Mảng để lưu thông tin sản phẩm
+        $orderDetails = [];
+
         if (!empty($products)) {
             foreach ($products as $ma_sp => $product) {
                 $ten_sp = $product['ten_sp'] ?? '';
@@ -195,18 +198,35 @@ class ProductController extends CoreController
                 $thanhTien = @($gia_sp * $soLuong);
                 $tongTien += $thanhTien;
 
-                echo "Tên sản phẩm: $ten_sp | Số lượng: $soLuong | Thành tiền: $thanhTien VND<br>";
+                if(isset($_SESSION['ten_voucher'])) {
+                    $tienship = 0;
+                } else {
+                    $tienship = 20000;
+                }
+
+                $tongThanhToan = $thanhTien + $tienship;
+
+                // Thêm thông tin vào mảng orderDetails
+                $orderDetails[] = [
+                    'ten_sp' => $ten_sp,
+                    'soLuong' => $soLuong,
+                    'tienship' => $tienship,
+                    'tongThanhToan' => $tongThanhToan,
+                ];
             }
         }
 
+        // Lưu thông tin vào mảng $data
         $data['tennguoidung'] = $tennguoidung;
         $data['diachinguoidung'] = $diachinguoidung;
         $data['sdtnguoidung'] = $sdtnguoidung;
         $data['emailnguoidung'] = $emailnguoidung;
         $data['order'] = $products;
+        $data['orderDetails'] = $orderDetails;
 
         $this->renderView('page_order', $data);
     }
+
 
     // ----------------------------- payments -----------------------------
     public function Payments()
@@ -222,6 +242,59 @@ class ProductController extends CoreController
         if ($result === true) {
             // var_dump($result);
             header("Location: " . APPURL . '?url=page/index');
+        }
+    }
+
+    // ------------------------ get all orders ----------------
+    public function getAllOrderAdmin()
+    {
+        $data['orderList'] = $this->product->getAllOrderAdmin();
+        $this->renderView('page_orderManager', $data);
+    }
+
+    // ------------------------ thây đổi trạng thái ---------------
+    public function changeStatus()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $ma_donhang = $_POST['ma_donhang'];
+            $trangthai = $_POST['trangthai'];
+
+            $result = $this->product->changeStatus($trangthai, $ma_donhang);
+
+            if ($result) {
+                header("Location: " . APPURL . '?url=product/getAllOrderAdmin');
+                exit();
+            }
+        }
+    }
+
+    // ----------------------- hủy đơn hàng ---------------------------------
+    public function cancelOrder($ma_donhang)
+    {
+        $trangthai = 'huy-don';
+
+        $result = $this->product->cancelOrder($trangthai, $ma_donhang);
+
+        if ($result) {
+            header("Location: " . APPURL . '?url=user/pageOrderHistory');
+            exit();
+        }
+    }
+
+    // ------------------------ sử dụng voucher --------------------------------
+    public function UseVoucher()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $ten_voucher = $_POST['ten_voucher'];
+            $result = $this->product->UseVoucher($ten_voucher);
+
+            if ($result) {
+                $_SESSION['ten_voucher'] = $result['ten_voucher'];
+                header("Location: " . APPURL . '?url=product/checkOut');
+                exit();
+            } else {
+                echo "Voucher not found!";
+            }
         }
     }
 }

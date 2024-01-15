@@ -51,7 +51,7 @@ if (isset($_GET['ma_sp'])) {
                         <td>
                             <img src="<?php echo $each['anh_sp'] ?>" alt="" style="height:200px">
                         </td>
-                        <td><?php echo $each['gia_sp'] ?></td>
+                        <td><?php echo number_format($each['gia_sp']) ?></td>
                         <td><?php echo $each['mota_sp'] ?></td>
                         <td><?php echo $each['soluong'] ?></td>
                         <td>
@@ -82,7 +82,7 @@ if (isset($_GET['ma_sp'])) {
         $_SESSION['tongtien'] = $tongtien;
         $_SESSION['soluong'] = count($cart);
         ?>
-        <p>Tổng tiền: <?php echo $tongtien ?> VND</p>
+        <p>Tổng tiền: <?php echo number_format($tongtien) ?> VND</p>
         <button type="submit"><a href="?url=product/checkOut">Thanh toán</a></button>
     <?php else : ?>
         <p class="text-center">Giỏ hàng rỗng</p>
