@@ -30,7 +30,8 @@ class UserController extends CoreController
                     exit();
                 }
             } else {
-                echo 'Sai tên đăng nhập hoặc mật khẩu';
+                header("Location: " . APPURL . '?url=user/login&error=Sai tên đăng nhập hoặc mật khẩu');
+                exit();
             }
         }
         $this->renderView('login');
@@ -57,7 +58,7 @@ class UserController extends CoreController
 
     public function logout()
     {
-        $_SESSION = array();
+        unset($_SESSION['user']);
 
         session_destroy();
 
@@ -92,5 +93,10 @@ class UserController extends CoreController
     {
         $data['orderHistory'] = $this->user->getAllOrder($_SESSION['ma_tk']);
         $this->renderView('page_orderHistory', $data);
+    }
+
+    // ------------------------ pro file ---------------------------------
+    public function ViewProfile() {
+        $this->renderView('page_profile');
     }
 }

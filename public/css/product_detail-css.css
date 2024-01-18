@@ -1,0 +1,113 @@
+.article__product-detail-img img {
+    width: 100%;
+}
+
+.article__category-product i {
+    color: gray;
+}
+
+.article__origin-product i {
+    color: gray;
+}
+
+.group-update-quntity {
+    display: flex;
+}
+
+.button-update-qantity button {
+    border: none;
+    outline: none;
+    background-color: orange !important;
+    padding: 5px 10px;
+    color: white;
+}
+
+.button-addtocart button {
+    border: none;
+    outline: none;
+    background-color: orange !important;
+    padding: 10px 20px;
+    color: white;
+    width: 100%;
+}
+
+.button-addtocart button:hover {
+    background-color: gray;
+    transition: 0.5s;
+}
+
+.article__update-quantity--product input {
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+}
+
+.group-update-quntity {
+    display: flex;
+    align-items: center;
+}
+
+.button-update-qantity {
+    display: flex;
+    align-items: center;
+}
+
+.product__Introducing-incentives {
+    display: flex;
+}
+
+.Introducing-incentives i {
+    color: orange !important;
+}
+
+.comment-form {
+    margin-bottom: 20px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.comment-form button {
+    border: none;
+    outline: none;
+    background-color: orange;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.comment-form button:hover {
+    background-color: gray;
+    transition: 0.5s;
+}
+
+.comment {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.comment h5 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.comment p {
+    margin: 0;
+    color: #666;
+}
+
+.login-message {
+    margin-bottom: 20px;
+    color: #ff0000;
+}

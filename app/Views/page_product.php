@@ -1,12 +1,3 @@
-<h1>Đây là trang sản phẩm</h1>
-
-<ul>
-    <li><a href="?url=page/index">Trang chủ</a></li>
-    <li><a href="?url=product/productPage">Sản phẩm</a></li>
-    <li><a href="?url=page/aboutPage">Giới thiệu</a></li>
-    <li><a href="?url=page/contactPage">Liên hệ</a></li>
-</ul>
-
 <?php
 if (isset($_POST['search'])) {
     $search = $_POST['search'];
@@ -14,17 +5,6 @@ if (isset($_POST['search'])) {
     $search = '';
 }
 ?>
-<?php
-$tongsoluong = 0;
-
-if (isset($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $soluong) {
-        $tongsoluong += $soluong['soluong'];
-    }
-}
-?>
-
-<a href="?url=page/ViewCart"><?php echo 'Tổng số lượng' . " " . $tongsoluong; ?></a>
 
 <br>
 <ul>
@@ -63,7 +43,7 @@ if (isset($_SESSION['cart'])) {
                 <td><?= $each['FK_noi_xuatxu'] ?></td>
                 <td>
                     <a href="?url=product/AddToCart/<?= $each['ma_sp'] ?>">
-                    Thêm vào giỏ hàng</a>
+                        Thêm vào giỏ hàng</a>
                 </td>
             </tr>
         <?php } ?>
@@ -73,3 +53,5 @@ if (isset($_SESSION['cart'])) {
         </tr>
     <?php } ?>
 </table>
+
+<?php echo $paginationOutput; ?>

@@ -4,8 +4,9 @@ class PageController extends CoreController
 {
     public function index()
     {
-
-        $this->renderView('home');
+        $product = $this->createModel('product');
+        $data['dsSP'] = $product->getProductsbyLimit(4);
+        $this->renderView('home', $data);
     }
     public function contactPage()
     {

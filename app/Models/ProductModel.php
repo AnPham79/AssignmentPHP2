@@ -16,7 +16,6 @@ class ProductModel
     // -------------------------------- lấy tất cả sản phẩm -------------------------------------
     public function getAllProducts($FK_ma_danhmuc)
     {
-        var_dump($FK_ma_danhmuc);
         if (isset($_POST['search'])) {
             $search = $_POST['search'];
         } else {
@@ -38,7 +37,7 @@ class ProductModel
             FROM sanpham 
             WHERE FK_ma_danhmuc = '$FK_ma_danhmuc' 
             AND ten_sp LIKE '%$search%'";
-            var_dump($sql_check);
+
             $totalRecords = $this->conndb->pdo_query_one($sql_check);
             $getResult = $totalRecords['COUNT(*)'];
             $num_page = ceil($getResult / $limit);
@@ -53,7 +52,7 @@ class ProductModel
             LIMIT $limit OFFSET $offset";
         } else {
             $sql_check = "SELECT COUNT(*) FROM sanpham";
-            var_dump($sql_check);
+
             $totalRecords = $this->conndb->pdo_query_one($sql_check);
             $getResult = $totalRecords['COUNT(*)'];
             $num_page = ceil($getResult / $limit);
@@ -83,9 +82,8 @@ class ProductModel
             $output .= "<a href='?url=product/productPage&page=" . ($page + 1) . "'>Next</a>";
         }
 
-        echo $output;
-
-        return $this->conndb->pdo_query($sql);
+        $result = $this->conndb->pdo_query($sql);
+        return array('result' => $result, 'output' => $output);
     }
 
     // ------------------------------- Xem chi tiết sản phẩm tại mã --------------------------------
@@ -175,6 +173,12 @@ class ProductModel
     {
         return $this->conndb->pdo_execute("DELETE FROM sanpham WHERE ma_sp = ?", $ma_sp);
     }
+
+    public function deleteCmt($ma_sp)
+    {
+        return $this->conndb->pdo_execute("DELETE FROM binhluan WHERE FK_ma_sp = ?", $ma_sp);
+    }
+
 
     // ------------------------------- Thao tác người dùng --------------------------------------
     // ------------------------------- Thêm sản phẩm vào giỏ hàng -------------------------------
@@ -305,5 +309,17 @@ class ProductModel
             return $this->conndb->pdo_query_one("SELECT * FROM voucher WHERE ten_voucher = ?", $ten_voucher);
         }
         return false;
+    }
+
+    // -------------------------- lấy sản phẩm ra nhưng li mit ---------------------------
+    public function getProductsbyLimit($limit)
+    {
+        return $this->conndb->pdo_query("SELECT sanpham.*, danhmuc.ten_danhmuc AS FK_ten_danhmuc, 
+                xuatxu.noi_xuatxu AS FK_noi_xuatxu
+        FROM sanpham 
+        JOIN danhmuc ON sanpham.FK_ma_danhmuc = danhmuc.ma_danhmuc 
+        JOIN xuatxu ON sanpham.FK_ma_xuatxu = xuatxu.ma_xuatxu
+        ORDER BY RAND()
+        LIMIT $limit");
     }
 }

@@ -15,17 +15,21 @@ class ProductController extends CoreController
     {
         $FK_ma_danhmuc = isset($this->params[0]) ? $this->params[0] : null;
 
-        $data['listProducts'] = $this->product->getAllProducts($FK_ma_danhmuc);
+        $result = $this->product->getAllProducts($FK_ma_danhmuc);
+
+        $data['listProducts'] = $result['result'];
+
+        $data['paginationOutput'] = $result['output'];
 
         $this->renderView('page_product', $data);
     }
-
 
     // ---------------------- chi tiết sản phẩm --------------------------------
     public function viewProduct($ma_sp)
     {
         $data['product'] = $this->product->viewProduct($ma_sp);
         $data['getCommnet'] = $this->product->GetCommentByFKid($ma_sp);
+        $data['dsSP'] = $this->product->getProductsbyLimit(4);
 
         $this->renderView('product_detail', $data);
     }
@@ -33,7 +37,11 @@ class ProductController extends CoreController
     // ---------------------------- Chọn sản phẩm theo danh mục -----------------------------
     public function selectCategory($FK_ma_danhmuc)
     {
-        $data['listProducts'] = $this->product->getAllProducts($FK_ma_danhmuc);
+        $result = $this->product->getAllProducts($FK_ma_danhmuc);
+
+        $data['listProducts'] = $result['result'];
+
+        $data['paginationOutput'] = $result['output'];
 
         $this->renderView('page_product', $data);
     }
@@ -94,9 +102,12 @@ class ProductController extends CoreController
 
     public function deletePrd($ma_sp)
     {
-        $data = $this->product->deletePrd($ma_sp);
+        $this->product->deleteCmt($ma_sp);
+        $this->product->deletePrd($ma_sp);
         header("Location: " . APPURL . '?url=product/viewPrdManager');
+        exit();
     }
+
 
     // ----------------------------- phần quản lí của admin --------------------------------
     // ----------------------------- xem quản lí sản phẩm --------------------------------
@@ -198,7 +209,7 @@ class ProductController extends CoreController
                 $thanhTien = @($gia_sp * $soLuong);
                 $tongTien += $thanhTien;
 
-                if(isset($_SESSION['ten_voucher'])) {
+                if (isset($_SESSION['ten_voucher'])) {
                     $tienship = 0;
                 } else {
                     $tienship = 20000;
