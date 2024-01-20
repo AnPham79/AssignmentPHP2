@@ -10,7 +10,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background-image: url(./img/bannerLogin.png);
+            background-image: url(./img/bannerauth.png);
             background-color: #f4f4f4;
             background-size: cover;
             background-repeat: no-repeat;

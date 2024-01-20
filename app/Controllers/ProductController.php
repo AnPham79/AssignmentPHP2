@@ -169,13 +169,17 @@ class ProductController extends CoreController
                 $_POST['FK_ma_sp'],
                 $_SESSION['ma_tk']
             );
+
             if ($result === true) {
-                header("Location: " . APPURL . '?url=product/productPage');
+                $productId = $_POST['FK_ma_sp'];
+                header("Location: " . APPURL . "?url=product/viewProduct/$productId");
+                exit();
             } else {
-                echo 'bình luận không thành công';
+                echo 'Bình luận không thành công';
             }
         }
     }
+
 
     // ------------------------ Thanh toán --------------------------
     public function checkOut()
@@ -307,5 +311,12 @@ class ProductController extends CoreController
                 echo "Voucher not found!";
             }
         }
+    }
+
+    // ---------------------------- lấy tất cả bình luận ------------------------
+    public function ViewCmtManager()
+    {
+        $data['result'] = $this->product->ViewCmtManager();
+        return $this->renderView('page_cmtManager', $data);
     }
 }

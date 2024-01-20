@@ -18,14 +18,14 @@ if (isset($_GET['ma_sp'])) {
                     <div class="card-header">
                         <strong>Giỏ hàng</strong>
                     </div>
-                    <table class="table">
+                    <table class="table text-center">
                         <thead>
                             <tr>
                                 <td>Tên</td>
                                 <td>Ảnh</td>
                                 <td>Giá</td>
-                                <td>Số lượng</td>
                                 <td>Tăng số lượng</td>
+                                <td>Số lượng</td>
                                 <td>Giảm số lượng</td>
                                 <td>Xóa sản phẩm</td>
                             </tr>
@@ -37,16 +37,16 @@ if (isset($_GET['ma_sp'])) {
                                     <td>
                                         <img src="<?php echo $each['anh_sp'] ?>" alt="" style="height:200px">
                                     </td>
-                                    <td><?php echo number_format($each['gia_sp']) ?></td>
+                                    <td><?php echo number_format($each['gia_sp']) ?> đ</td>
+                                    <td>
+                                        <a class="text-decoration-none" href="?url=product/UpdateQuantity/<?php echo $ma_sp ?>&type=incre">+</a>
+                                    </td>
                                     <td><?php echo $each['soluong'] ?></td>
                                     <td>
-                                        <a href="?url=product/UpdateQuantity/<?php echo $ma_sp ?>&type=incre">+</a>
+                                        <a class="text-decoration-none" href="?url=product/UpdateQuantity/<?php echo $ma_sp ?>&type=decre">-</a>
                                     </td>
                                     <td>
-                                        <a href="?url=product/UpdateQuantity/<?php echo $ma_sp ?>&type=decre">-</a>
-                                    </td>
-                                    <td>
-                                        <a href="?url=product/DeleteCart/<?php echo $ma_sp ?>">Xóa</a>
+                                        <a class="text-decoration-none" href="?url=product/DeleteCart/<?php echo $ma_sp ?>">Xóa</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -80,7 +80,7 @@ if (isset($_GET['ma_sp'])) {
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-top: 20px;">
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-top: 20px;">
                     <a href="?url=product/checkOut" style="color: white; text-decoration:none;">Thanh toán sản phẩm</a>
                 </button>
             </div>

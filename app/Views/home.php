@@ -93,4 +93,55 @@
         <div class="banner-mid-page">
             <img src="./img/banner3.jpg" alt="">
         </div>
+        <div class="article__product-demo--index">
+            <div class="container">
+                <div class="row py-5">
+                    <h1>Sản phẩm mới</h1>
+                    <span class="py-3">Trong thế giới mua sắm trực tuyến đầy cạnh tranh, không gì có thể so sánh với sự
+                        hứng thú và niềm vui của việc khám phá những sản phẩm nổi bật trên trang web của chúng tôi.
+                        Với sự đa dạng và chất lượng hàng đầu, chúng tôi tự hào giới thiệu đến bạn bộ sưu tập sản phẩm nổi bật,
+                        nơi mà sự độc đáo và chất lượng hội tụ để mang lại cho bạn trải nghiệm mua sắm tuyệt vời nhất.
+                    </span>
+                    <?php foreach ($dsSP2 as $each) { ?>
+                        <div class="col-md-3 col-12 py-3">
+                            <div class="card-product" style="width: 18rem;">
+                                <div class="card-product-img">
+                                    <a href="?url=product/viewProduct/<?= $each['ma_sp'] ?>">
+                                        <img src="<?php echo $each['anh_sp'] ?>" alt=""></a>
+                                </div>
+                                <div class="card-product-name">
+                                    <p><a href="?url=product/viewProduct/<?= $each['ma_sp'] ?>" style="text-decoration:none; color:black;">
+                                            <?php echo $each['ten_sp'] ?></a>
+                                    </p>
+                                </div>
+                                <div class="card-product-price">
+                                    <p><?php echo number_format($each['gia_sp']) ?> VND</p>
+                                </div>
+                                <div class="card-product-rating">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                </div>
+                                <div class="card-product-origin">
+                                    <p>Xuất xứ : <i><?php echo $each['FK_noi_xuatxu'] ?></i></p>
+                                </div>
+                                <div class="card-product-addtocart">
+                                    <button>
+                                        <i class='bx bx-plus'></i>
+                                        <a href="?url=product/AddToCart/<?= $each['ma_sp'] ?>">Thêm vào giỏ hàng</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <div class="see-more-product-index my-4">
+                        <button class="btn">
+                            <a href="?url=product/productPage"><i class='bx bx-right-arrow-alt'></i>Xem thêm</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>

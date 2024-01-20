@@ -9,6 +9,8 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="<?= APPURL ?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= APPURL ?>css/product_detail-css.css">
+    <link rel="stylesheet" href="<?= APPURL ?>css/product_page.css">
+    <link rel="stylesheet" href="<?= APPURL ?>css/css_admin.css">
 </head>
 <?php
 $tongsoluong = 0;

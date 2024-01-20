@@ -28,7 +28,7 @@ class ProductModel
             $page = 1;
         }
 
-        $limit = 3;
+        $limit = 9;
 
         $output = '';
 
@@ -67,6 +67,69 @@ class ProductModel
             LIMIT $limit OFFSET $offset";
         }
 
+        $output .= "<style>";
+        $output .= "
+            .pagination-group a {
+                text-decoration: none;
+            }
+
+            .pagination-group {
+                display: flex;
+                justify-content: center; /* Đưa các phần tử về giữa */
+                align-items: center; /* Đưa các phần tử theo chiều dọc về giữa */
+            }
+
+            .pagination {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+            }
+
+            .pagination li {
+                margin-right: 5px;
+            }
+
+            .pagination a {
+                text-decoration: none;
+                padding: 5px 10px;
+                border: 1px solid #ccc;
+                background-color: #f5f5f5;
+                color: #333;
+            }
+
+            .pagination a.active {
+                background-color: orange;
+                color: #fff;
+            }
+
+            .pagination a:hover {
+                background-color: #ddd;
+            }
+
+            .pagination-nav a {
+                text-decoration: none;
+                padding: 5px 10px;
+                border: 1px solid #ccc;
+                background-color: #f5f5f5;
+                color: #333;
+            }
+
+            .pagination-nav a:hover {
+                background-color: #ddd;
+            }
+
+            .pagination-nav a.next {
+                margin-left: 5px;
+            }
+
+            .pagination-nav a.prev {
+                margin-right: 5px;
+            }
+        ";
+        $output .= "</style>";
+
+        $output .= "<div class='pagination-group'>";
         if ($page > 1) {
             $output .= "<a href='?url=product/productPage&page=" . ($page - 1) . "'>Prev</a>";
         }
@@ -79,8 +142,11 @@ class ProductModel
         $output .= "</ul>";
 
         if ($num_page > $page) {
-            $output .= "<a href='?url=product/productPage&page=" . ($page + 1) . "'>Next</a>";
+            $output .= "<a href='?url=product/productPage&page=" . ($page + 1) . "' class='pagination-nav next'>Next</a>";
         }
+
+        $output .= "</div>";
+
 
         $result = $this->conndb->pdo_query($sql);
         return array('result' => $result, 'output' => $output);
@@ -260,6 +326,7 @@ class ProductModel
 
         if ($result) {
             unset($_SESSION['cart']);
+            unset($_SESSION['ten_voucher']);
         }
 
         return $result;
@@ -268,11 +335,18 @@ class ProductModel
     // -------------------------------- quản lí sản phẩm admin -----------------------------
     public function getAllPrdByAdmin()
     {
+        if (isset($_POST['search'])) {
+            $search = $_POST['search'];
+        } else {
+            $search = '';
+        }
+        
         return $this->conndb->pdo_query("SELECT sanpham.*, danhmuc.ten_danhmuc AS FK_ten_danhmuc, 
         xuatxu.noi_xuatxu AS FK_noi_xuatxu
         FROM sanpham 
         JOIN danhmuc ON sanpham.FK_ma_danhmuc = danhmuc.ma_danhmuc 
-        JOIN xuatxu ON sanpham.FK_ma_xuatxu = xuatxu.ma_xuatxu");
+        JOIN xuatxu ON sanpham.FK_ma_xuatxu = xuatxu.ma_xuatxu
+        WHERE sanpham.ten_sp LIKE '%$search%'");
     }
 
     // ---------------------------------- quản lí hóa đơn -------------------------------------
@@ -321,5 +395,24 @@ class ProductModel
         JOIN xuatxu ON sanpham.FK_ma_xuatxu = xuatxu.ma_xuatxu
         ORDER BY RAND()
         LIMIT $limit");
+    }
+
+    public function getProductsNewbyLimit($limit)
+    {
+        return $this->conndb->pdo_query("SELECT sanpham.*, danhmuc.ten_danhmuc AS FK_ten_danhmuc, 
+                xuatxu.noi_xuatxu AS FK_noi_xuatxu
+        FROM sanpham 
+        JOIN danhmuc ON sanpham.FK_ma_danhmuc = danhmuc.ma_danhmuc 
+        JOIN xuatxu ON sanpham.FK_ma_xuatxu = xuatxu.ma_xuatxu
+        LIMIT $limit");
+    }
+
+    
+
+    // ---------------------- lấy tất cả bình luận ---------------------------------
+    public function ViewCmtManager() {
+        $sql = "SELECT * FROM binhluan";
+
+        return $this->conndb->pdo_query($sql);
     }
 }

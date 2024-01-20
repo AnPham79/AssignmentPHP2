@@ -99,4 +99,10 @@ class UserController extends CoreController
     public function ViewProfile() {
         $this->renderView('page_profile');
     }
+
+    // ---------------------------- user ----------------------------------------
+    public function ViewUserManager() {
+        $data['result'] = $this->user->ViewUserManager();
+        return $this->renderView('page_UserManager', $data);
+    }
 }

@@ -95,7 +95,8 @@
                 <div class="card-product" style="width: 18rem;">
                     <div class="card-product-img">
                         <a href="?url=product/viewProduct/<?= $each['ma_sp'] ?>">
-                            <img src="<?php echo $each['anh_sp'] ?>" alt=""></a>
+                            <img src="<?php echo $each['anh_sp'] ?>" alt="">
+                        </a>
                     </div>
                     <div class="card-product-name">
                         <p><a href="?url=product/viewProduct/<?= $each['ma_sp'] ?>" style="text-decoration:none; color:black;">

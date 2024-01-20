@@ -6,6 +6,7 @@ class PageController extends CoreController
     {
         $product = $this->createModel('product');
         $data['dsSP'] = $product->getProductsbyLimit(4);
+        $data['dsSP2'] = $product->getProductsNewbyLimit(4);
         $this->renderView('home', $data);
     }
     public function contactPage()
