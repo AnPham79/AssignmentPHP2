@@ -96,7 +96,7 @@
         <div class="article__product-demo--index">
             <div class="container">
                 <div class="row py-5">
-                    <h1>Sản phẩm mới</h1>
+                    <h1>Sản phẩm xem nhiều</h1>
                     <span class="py-3">Trong thế giới mua sắm trực tuyến đầy cạnh tranh, không gì có thể so sánh với sự
                         hứng thú và niềm vui của việc khám phá những sản phẩm nổi bật trên trang web của chúng tôi.
                         Với sự đa dạng và chất lượng hàng đầu, chúng tôi tự hào giới thiệu đến bạn bộ sưu tập sản phẩm nổi bật,

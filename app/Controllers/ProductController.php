@@ -27,6 +27,7 @@ class ProductController extends CoreController
     // ---------------------- chi tiết sản phẩm --------------------------------
     public function viewProduct($ma_sp)
     {
+        $data['product'] = $this->product->updateViewUser($ma_sp);
         $data['product'] = $this->product->viewProduct($ma_sp);
         $data['getCommnet'] = $this->product->GetCommentByFKid($ma_sp);
         $data['dsSP'] = $this->product->getProductsbyLimit(4);
@@ -53,7 +54,7 @@ class ProductController extends CoreController
     {
         $data['listCategory'] = $this->product->getAllCategories();
         $data['listOrigins'] = $this->product->getAllOrigins();
-        $this->renderView('createPrd', $data);
+        $this->renderAdmin('createPrd', $data);
     }
 
     public function storePrd()
@@ -73,13 +74,13 @@ class ProductController extends CoreController
                 echo 'Thêm sản phẩm không thành công';
             }
         }
-        $this->renderView('createPrd');
+        $this->renderAdmin('createPrd');
     }
 
     public function editPrd($ma_sp)
     {
         $data['dataPrd'] = $this->product->findPrd($ma_sp);
-        $this->renderView('editPrd', $data);
+        $this->renderAdmin('editPrd', $data);
     }
 
     public function updatePrd()
@@ -114,7 +115,7 @@ class ProductController extends CoreController
     public function viewPrdManager()
     {
         $data['listAllPrd'] = $this->product->getAllPrdByAdmin();
-        $this->renderView('page_prdManager', $data);
+        $this->renderAdmin('page_prdManager', $data);
     }
 
     // --------------------------- Thêm sản phẩm vào giỏ hàng --------------------------------
@@ -264,7 +265,7 @@ class ProductController extends CoreController
     public function getAllOrderAdmin()
     {
         $data['orderList'] = $this->product->getAllOrderAdmin();
-        $this->renderView('page_orderManager', $data);
+        $this->renderAdmin('page_orderManager', $data);
     }
 
     // ------------------------ thây đổi trạng thái ---------------
@@ -317,6 +318,6 @@ class ProductController extends CoreController
     public function ViewCmtManager()
     {
         $data['result'] = $this->product->ViewCmtManager();
-        return $this->renderView('page_cmtManager', $data);
+        return $this->renderAdmin('page_cmtManager', $data);
     }
 }

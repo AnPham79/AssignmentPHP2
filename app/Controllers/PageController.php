@@ -6,7 +6,7 @@ class PageController extends CoreController
     {
         $product = $this->createModel('product');
         $data['dsSP'] = $product->getProductsbyLimit(4);
-        $data['dsSP2'] = $product->getProductsNewbyLimit(4);
+        $data['dsSP2'] = $product->getProductsByHighestViews(4);
         $this->renderView('home', $data);
     }
     public function contactPage()
@@ -16,10 +16,6 @@ class PageController extends CoreController
     public function aboutPage()
     {
         $this->renderView('page_about');
-    }
-
-    public function adminPage() {
-        $this->renderView('page_admin');
     }
 
     public function ViewCart() {

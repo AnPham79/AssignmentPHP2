@@ -22,6 +22,9 @@
                 <div class="article__origin-product py-2">
                     <p>Nguồn góc: <i><?= $product['FK_noi_xuatxu'] ?></i></p>
                 </div>
+                <div class="article__quantity-view-product pb-4 pt-2">
+                    <p>lượt xem: <i><?= $product['luotxem'] ?></i></p>
+                </div>
                 <div class="product__Introducing-incentives">
                     <span>Vận chuyển:</span>
                     <div class="Introducing-incentives px-3">

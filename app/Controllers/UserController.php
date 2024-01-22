@@ -21,12 +21,13 @@ class UserController extends CoreController
                 $_SESSION['diachi'] = $result['diachi'];
                 $_SESSION['matkhau'] = $result['matkhau'];
                 $_SESSION['sodienthoai'] = $result['sodienthoai'];
+                $_SESSION['anhnguoidung'] = $result['anhnguoidung'];
                 $_SESSION['quyen'] = $result['quyen'];
                 if ($result['quyen'] === 'user') {
                     header("Location: " . APPURL . '?url=page/index');
                     exit();
                 } elseif ($result['quyen'] === 'admin') {
-                    header("Location: " . APPURL . '?url=page/adminPage');
+                    header("Location: " . APPURL . '?url=product/viewPrdManager');
                     exit();
                 }
             } else {
@@ -40,16 +41,11 @@ class UserController extends CoreController
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $result = $this->user->register($_POST['hovaten'], $_POST['diachi'], $_POST['sodienthoai'], $_POST['email'], $_POST['matkhau']);
+            $result = $this->user->register($_POST['hovaten'], 
+            $_POST['diachi'], $_POST['sodienthoai'], 
+            $_POST['email'], $_FILES['anhnguoidung'],
+            $_POST['matkhau']);
             if ($result) {
-                $_SESSION['user'] = $result;
-                $_SESSION['email'] = $result['email'];
-                $_SESSION['hovaten'] = $result['hovaten'];
-                $_SESSION['diachi'] = $result['diachi'];
-                $_SESSION['ma_tk'] = $result['ma_tk'];
-                $_SESSION['matkhau'] = $result['matkhau'];
-                $_SESSION['sodienthoai'] = $result['sodienthoai'];
-                $_SESSION['quyen'] = $result['quyen'];
                 header("Location:" . APPURL . '?url=user/login');
             }
         }
@@ -67,15 +63,20 @@ class UserController extends CoreController
     }
 
     // ------------------------- đổi mật khẩu ---------------------------------
-    public function editPass()
+    public function editAccount()
     {
-        $this->renderView('editPass');
+        $this->renderView('editAccount');
     }
 
-    public function updatePass()
+    public function updateAccount()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $result = $this->user->updatePass(
+            $result = $this->user->updateAccount(
+                $_FILES['anhnguoidung'],
+                $_POST['hovaten'],
+                $_POST['diachi'],
+                $_POST['sodienthoai'],
+                $_POST['email'],
                 $_POST['matkhau'],
                 $_SESSION['ma_tk']
             );
@@ -103,6 +104,6 @@ class UserController extends CoreController
     // ---------------------------- user ----------------------------------------
     public function ViewUserManager() {
         $data['result'] = $this->user->ViewUserManager();
-        return $this->renderView('page_UserManager', $data);
+        return $this->renderAdmin('page_UserManager', $data);
     }
 }

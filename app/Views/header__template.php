@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="<?= APPURL ?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= APPURL ?>css/product_detail-css.css">
     <link rel="stylesheet" href="<?= APPURL ?>css/product_page.css">
-    <link rel="stylesheet" href="<?= APPURL ?>css/css_admin.css">
 </head>
 <?php
 $tongsoluong = 0;
@@ -20,6 +19,7 @@ if (isset($_SESSION['cart'])) {
         $tongsoluong += $soluong['soluong'];
     }
 }
+
 ?>
 <body>
     <div class="header">

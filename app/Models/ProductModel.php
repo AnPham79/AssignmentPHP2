@@ -188,7 +188,7 @@ class ProductModel
 
         if (move_uploaded_file($anh_sp["tmp_name"], $target_file)) {
             return $this->conndb->pdo_execute("INSERT INTO sanpham (ten_sp, anh_sp, gia_sp, mota_sp, FK_ma_danhmuc, FK_ma_xuatxu) 
-        VALUES ('$ten_sp', '$target_file', '$gia_sp', '$mota_sp', '$FK_ma_danhmuc', '$FK_ma_xuatxu')");
+            VALUES ('$ten_sp', '$target_file', '$gia_sp', '$mota_sp', '$FK_ma_danhmuc', '$FK_ma_xuatxu')");
         } else {
             echo "Có lỗi khi tải lên tệp tin.";
             return false;
@@ -245,6 +245,15 @@ class ProductModel
         return $this->conndb->pdo_execute("DELETE FROM binhluan WHERE FK_ma_sp = ?", $ma_sp);
     }
 
+    // -------------------------------- tăng lượt xem của sản phẩm khi người dùng bấm vào -------
+
+    public function updateViewUser($ma_sp)
+    {
+        $sql = "UPDATE sanpham
+                SET luotxem = luotxem + 1
+                WHERE ma_sp = $ma_sp";
+        return $this->conndb->pdo_execute($sql);
+    }
 
     // ------------------------------- Thao tác người dùng --------------------------------------
     // ------------------------------- Thêm sản phẩm vào giỏ hàng -------------------------------
@@ -340,7 +349,7 @@ class ProductModel
         } else {
             $search = '';
         }
-        
+
         return $this->conndb->pdo_query("SELECT sanpham.*, danhmuc.ten_danhmuc AS FK_ten_danhmuc, 
         xuatxu.noi_xuatxu AS FK_noi_xuatxu
         FROM sanpham 
@@ -397,20 +406,21 @@ class ProductModel
         LIMIT $limit");
     }
 
-    public function getProductsNewbyLimit($limit)
+    // --------------------------- lấy 4 sản phẩm với lượt xem cao nhất --------------------
+    public function getProductsByHighestViews($limit)
     {
         return $this->conndb->pdo_query("SELECT sanpham.*, danhmuc.ten_danhmuc AS FK_ten_danhmuc, 
                 xuatxu.noi_xuatxu AS FK_noi_xuatxu
         FROM sanpham 
         JOIN danhmuc ON sanpham.FK_ma_danhmuc = danhmuc.ma_danhmuc 
         JOIN xuatxu ON sanpham.FK_ma_xuatxu = xuatxu.ma_xuatxu
+        ORDER BY luotxem DESC
         LIMIT $limit");
     }
 
-    
-
     // ---------------------- lấy tất cả bình luận ---------------------------------
-    public function ViewCmtManager() {
+    public function ViewCmtManager()
+    {
         $sql = "SELECT * FROM binhluan";
 
         return $this->conndb->pdo_query($sql);

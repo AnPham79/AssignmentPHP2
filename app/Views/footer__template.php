@@ -32,6 +32,7 @@
             </div>
         </div>
     </div>
-    <script src="<?php APPURL ?>js/bootstrap.bundle.js"></script>
+    <script src="<?php APPURL ?>js/bootstrap.bundle.js">
+    </script>
 </body>
 </html>

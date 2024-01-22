@@ -87,7 +87,8 @@
                 echo "<p style='color: red;'>$errorMessage</p>";
             }
             ?>
-            <form action="" method="POST">
+            <form action="" method="POST"
+                enctype="multipart/form-data">
                 <label for="hovaten"><i class='bx bxs-user'></i>Họ và tên</label>
                 <input type="text" name="hovaten" placeholder="Nhập họ và tên của bạn" required>
 
@@ -96,6 +97,9 @@
 
                 <label for="sodienthoai"><i class='bx bxs-phone'></i>Số điện thoại</label>
                 <input type="text" name="sodienthoai" placeholder="Nhập số điện thoại của bạn" required>
+
+                <label for="anhnguoidung"><i class='bx bxs-palette'></i>Ảnh đại diện</label>
+                <input type="file" name="anhnguoidung" placeholder="Chọn ảnh đại diện của bạn" required>
 
                 <label for="email"><i class='bx bxs-envelope'></i>Email</label>
                 <input type="email" name="email" placeholder="Nhập email của bạn" required>
