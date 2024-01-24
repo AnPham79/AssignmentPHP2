@@ -314,33 +314,6 @@ class ProductModel
         return $result;
     }
 
-    // ------------------------ Thannh toán ---------------------------------------
-    public function Payments($tennguoidung, $diachinguoidung, $sdtnguoidung, $emailnguoidung, $tongtien, $FK_ma_taikhoan)
-    {
-        $products = $_SESSION['cart'] ?? [];
-
-        $sanpham_name = '';
-        $sanpham_quantity = '';
-        foreach ($products as $ma_sp => $product) {
-            $sanpham_name .= $product['ten_sp'] . " , ";
-            $sanpham_quantity .=  $product['soluong'] . " , ";
-        }
-
-        $sql = "INSERT INTO 
-        donhang(tennguoidung, diachinguoidung, sdtnguoidung, emailnguoidung, tensanpham, soluong , tongtien, FK_ma_taikhoan) 
-        VALUES
-        ('$tennguoidung', '$diachinguoidung', '$sdtnguoidung', '$emailnguoidung', '$sanpham_name','$sanpham_quantity', '$tongtien', '$FK_ma_taikhoan')";
-
-        $result = $this->conndb->pdo_execute($sql);
-
-        if ($result) {
-            unset($_SESSION['cart']);
-            unset($_SESSION['ten_voucher']);
-        }
-
-        return $result;
-    }
-
     // -------------------------------- quản lí sản phẩm admin -----------------------------
     public function getAllPrdByAdmin()
     {
@@ -378,22 +351,6 @@ class ProductModel
         WHERE ma_donhang = '$ma_donhang'");
     }
 
-    // ============================= sử dụng voucher ----------------------------------
-    public function VoucherAxist($ten_voucher)
-    {
-        $sql = "SELECT COUNT(*) FROM voucher WHERE ten_voucher = ?";
-        $count = $this->conndb->pdo_query_value($sql, $ten_voucher);
-        return $count > 0;
-    }
-
-    public function UseVoucher($ten_voucher)
-    {
-        if ($this->VoucherAxist($ten_voucher)) {
-            return $this->conndb->pdo_query_one("SELECT * FROM voucher WHERE ten_voucher = ?", $ten_voucher);
-        }
-        return false;
-    }
-
     // -------------------------- lấy sản phẩm ra nhưng li mit ---------------------------
     public function getProductsbyLimit($limit)
     {
@@ -417,6 +374,37 @@ class ProductModel
         ORDER BY luotxem DESC
         LIMIT $limit");
     }
+
+    public function getProductWithMaxQuantity() {
+        return $this->conndb->pdo_query("SELECT tensanpham, soluong
+            FROM donhang 
+            ORDER BY soluong DESC 
+            LIMIT 1");
+    }
+
+    public function getProductWithMinQuantity() {
+        return $this->conndb->pdo_query("SELECT tensanpham, soluong
+            FROM donhang 
+            ORDER BY soluong ASC 
+            LIMIT 1");
+    }
+
+    public function getTotalQuantityOfAllOrders() {
+        return $this->conndb->pdo_query("SELECT COUNT(*) 
+        as total_quantity FROM donhang");
+    }
+    
+
+    public function getTotalPriceOfAllOrders() {
+        return $this->conndb->pdo_query("SELECT SUM(tongtien) as
+         total_price FROM donhang");
+    }
+
+    public function getTotalQuantityOfAllProduct() {
+        return $this->conndb->pdo_query("SELECT SUM(soluong) as
+         total_quantity_product FROM donhang");
+    }
+    
 
     // ---------------------- lấy tất cả bình luận ---------------------------------
     public function ViewCmtManager()

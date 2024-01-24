@@ -81,7 +81,7 @@ if (isset($_GET['ma_sp'])) {
                     </div>
                 </div>
                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-top: 20px;">
-                    <a href="?url=product/checkOut" style="color: white; text-decoration:none;">Thanh toán sản phẩm</a>
+                    <a href="?url=order/checkOut" style="color: white; text-decoration:none;">Thanh toán sản phẩm</a>
                 </button>
             </div>
         </div>

@@ -206,3 +206,69 @@ transition: 0.5s;
 .header__admin-info-group--2 {
     padding-left: 20px;
 }
+
+/* ----------------------------- thống kê -------------------------- */
+.analytics {
+    display: flex;
+    justify-content: space-between;
+}
+
+.analytics i{
+    font-size: 46px;
+}
+
+.analytics__total-order {
+    display: flex;
+}
+
+.analytics b {
+    font-size: 20px;
+}
+
+.analytics p {
+    font-size: 14px;
+}
+
+.analytics__total-order--icon {
+    background-color: rgb(255, 156, 156);
+    padding: 10px 20px;
+    margin-right:20px;
+    border-radius: 20px;
+}
+.analyrics__product-buy-the--most {
+    display: flex;
+}
+
+.analyrics__product-buy-the--most--icon {
+    background-color: rgb(133, 255, 133);
+    padding: 10px 20px;
+    margin-right:20px;
+    border-radius: 20px;
+}
+
+.analytics__revenue {
+    display: flex;
+}
+
+.analytics__revenue-icon {
+    background-color: rgb(141, 141, 255);
+    padding: 10px 20px;
+    margin-right:20px;
+    border-radius: 20px;
+}
+
+.analytics__quantity-product {
+    display: flex;
+}
+
+.analytics__quantity-product--icon {
+    background-color: #ffdd77;
+    padding: 10px 20px;
+    margin-right:20px;
+    border-radius: 20px;
+}
+
+.analytics__achive {
+    display: flex;
+    flex-direction: column;
+}

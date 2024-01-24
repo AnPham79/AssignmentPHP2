@@ -181,92 +181,24 @@ class ProductController extends CoreController
         }
     }
 
-
-    // ------------------------ Thanh toán --------------------------
-    public function checkOut()
-    {
-        if (!isset($_SESSION['hovaten']) && !isset($_SESSION['email'])) {
-            header('location:?url=user/login');
-            exit();
-        }
-
-        $tennguoidung = $_SESSION['hovaten'] ?? '';
-        $diachinguoidung = $_SESSION['diachi'] ?? '';
-        $sdtnguoidung = $_SESSION['sodienthoai'] ?? '';
-        $emailnguoidung = $_SESSION['email'] ?? '';
-
-        $products = $_SESSION['cart'] ?? [];
-
-        $tongSoLuong = 0;
-        $tongTien = 0;
-
-        // Mảng để lưu thông tin sản phẩm
-        $orderDetails = [];
-
-        if (!empty($products)) {
-            foreach ($products as $ma_sp => $product) {
-                $ten_sp = $product['ten_sp'] ?? '';
-                $gia_sp = $product['gia_sp'] ?? 0;
-                $soLuong = $product['soluong'] ?? 0;
-
-                $tongSoLuong += $soLuong;
-
-                $thanhTien = @($gia_sp * $soLuong);
-                $tongTien += $thanhTien;
-
-                if (isset($_SESSION['ten_voucher'])) {
-                    $tienship = 0;
-                } else {
-                    $tienship = 20000;
-                }
-
-                $tongThanhToan = $thanhTien + $tienship;
-
-                // Thêm thông tin vào mảng orderDetails
-                $orderDetails[] = [
-                    'ten_sp' => $ten_sp,
-                    'soLuong' => $soLuong,
-                    'tienship' => $tienship,
-                    'tongThanhToan' => $tongThanhToan,
-                ];
-            }
-        }
-
-        // Lưu thông tin vào mảng $data
-        $data['tennguoidung'] = $tennguoidung;
-        $data['diachinguoidung'] = $diachinguoidung;
-        $data['sdtnguoidung'] = $sdtnguoidung;
-        $data['emailnguoidung'] = $emailnguoidung;
-        $data['order'] = $products;
-        $data['orderDetails'] = $orderDetails;
-
-        $this->renderView('page_order', $data);
-    }
-
-
-    // ----------------------------- payments -----------------------------
-    public function Payments()
-    {
-        $result = $this->product->Payments(
-            $_SESSION['hovaten'],
-            $_SESSION['diachi'],
-            $_SESSION['sodienthoai'],
-            $_SESSION['email'],
-            $_SESSION['tongtien'],
-            $_SESSION['ma_tk'],
-        );
-        if ($result === true) {
-            // var_dump($result);
-            header("Location: " . APPURL . '?url=page/index');
-        }
-    }
-
     // ------------------------ get all orders ----------------
     public function getAllOrderAdmin()
     {
+        $data['maxQuantityProduct'] = $this->product->getProductWithMaxQuantity();
+
+        $data['minQuantityProduct'] = $this->product->getProductWithMinQuantity();
+
+        $data['totalquantity'] = $this->product->getTotalQuantityOfAllOrders();
+
+        $data['totalPrice'] = $this->product->getTotalPriceOfAllOrders();
+
+        $data['totalproduct'] = $this->product->getTotalQuantityOfAllProduct();
+
         $data['orderList'] = $this->product->getAllOrderAdmin();
-        $this->renderAdmin('page_orderManager', $data);
+
+        $this->renderAdmin('page_analytic', $data);
     }
+
 
     // ------------------------ thây đổi trạng thái ---------------
     public function changeStatus()
@@ -295,29 +227,5 @@ class ProductController extends CoreController
             header("Location: " . APPURL . '?url=user/pageOrderHistory');
             exit();
         }
-    }
-
-    // ------------------------ sử dụng voucher --------------------------------
-    public function UseVoucher()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $ten_voucher = $_POST['ten_voucher'];
-            $result = $this->product->UseVoucher($ten_voucher);
-
-            if ($result) {
-                $_SESSION['ten_voucher'] = $result['ten_voucher'];
-                header("Location: " . APPURL . '?url=product/checkOut');
-                exit();
-            } else {
-                echo "Voucher not found!";
-            }
-        }
-    }
-
-    // ---------------------------- lấy tất cả bình luận ------------------------
-    public function ViewCmtManager()
-    {
-        $data['result'] = $this->product->ViewCmtManager();
-        return $this->renderAdmin('page_cmtManager', $data);
     }
 }

@@ -10,7 +10,7 @@
 
     <div class="discount-code py-2">
         <span>Nhập mã giảm giá</span>
-        <form action="?url=product/UseVoucher" method="POST">
+        <form action="?url=voucher/UseVoucher" method="POST">
             <input type="text" name="ten_voucher">
             <button type="submit">Dùng</button>
         </form>
@@ -35,14 +35,24 @@
                             <td><?php echo $item['soLuong']; ?></td>
                             <td>
                                 <?php
-                                $item['tienship'] = isset($_SESSION['ten_voucher']) ? 0 : $item['tienship'];
-                                echo number_format($item['tienship']) . " " . 'VND';
+                                if (isset($_SESSION['ten_voucher']) && $_SESSION['ten_voucher'] === 'FREESHIP') {
+                                    echo '0';
+                                } else {
+                                    $phiVanChuyen = $item['tienship'];
+                                    echo number_format($item['tienship']);
+                                }
                                 ?>
                             </td>
                             <td>
                                 <?php
-                                $item['tongThanhToan'] = isset($_SESSION['ten_voucher']) ? $item['tongThanhToan'] - $item['tienship'] : $item['tongThanhToan'];
-                                echo number_format($item['tongThanhToan']) . " " . 'VND';
+                                $thanhToan = $item['tongThanhToan'];
+                                if (isset($_SESSION['gia_tri']) && isset($_SESSION['ten_voucher']) && $_SESSION['ten_voucher'] !== 'FREESHIP') {
+                                    $giamGia = ($thanhToan * $_SESSION['gia_tri']) / 100;
+                                    $thanhToan -= $giamGia;
+                                    echo number_format($thanhToan);
+                                } else {
+                                    echo number_format($thanhToan);
+                                }
                                 ?>
                             </td>
                         </tr>
@@ -52,7 +62,11 @@
         <?php } ?>
     </div>
 
+    <?php 
+        $_SESSION['tongtien'] = $thanhToan;
+    ?>
+
     <div class="payment-btn payment-btnn">
-        <button><a href="?url=product/Payments">Thanh toán ngay</a></button>
+        <button><a href="?url=order/Payments">Thanh toán ngay</a></button>
     </div>
 </div>

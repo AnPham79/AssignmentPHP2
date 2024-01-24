@@ -60,10 +60,8 @@
     <div class="article__admin">
         <div class="article-list-option--admin">
             <ul>
-                <li><a href="?url=product/viewPrdManager">Quản lý sản phẩm</a></li>
-                <li><a href="?url=user/ViewUserManager">Quản lý tài khoản</a></li>
-                <li><a href="?url=product/ViewCmtManager">Quản lý bình luận</a></li>
-                <li><a href="?url=product/getAllOrderAdmin">Quản lý hóa đơn</a></li>
+            <li><a href="?url=product/viewPrdManager">Quản lý sản phẩm</a></li>
+                <li><a href="?url=product/getAllOrderAdmin">Quản lý hóa đơn và thống kê</a></li>
             </ul>
         </div>
         <div class="article-content--option">

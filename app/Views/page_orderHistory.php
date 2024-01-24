@@ -7,7 +7,6 @@
     <title>Lịch sử mua hàng</title>
     <link rel="stylesheet" href="path/to/your/styles.css">
     <style>
-        /* Reset CSS */
         body,
         h1,
         h5,
@@ -23,7 +22,6 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Style cho container chứa lịch sử mua hàng */
         .order-history-container {
             margin: 20px;
             padding: 20px;
@@ -31,7 +29,6 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Style cho từng card trong lịch sử mua hàng */
         .order-card {
             margin-bottom: 20px;
             padding: 10px;
@@ -39,12 +36,10 @@
             border-radius: 8px;
         }
 
-        /* Style cho trạng thái đơn hàng */
         .order-status {
             font-weight: bold;
         }
 
-        /* Style cho nút hủy đơn */
         .order-cancel-button {
             background-color: #e74c3c;
             color: #fff;
@@ -77,9 +72,8 @@
                     <strong>Địa chỉ:</strong> <?php echo $row['diachinguoidung']; ?><br>
                     <strong>Số điện thoại:</strong> <?php echo $row['sdtnguoidung']; ?><br>
                     <strong>Email:</strong> <?php echo $row['emailnguoidung']; ?><br>
-                    <strong>Tên sản phẩm:</strong> <?php echo $row['tensanpham']; ?><br>
-                    <strong>Số lượng:</strong> <?php echo $row['soluong']; ?><br>
-                    <strong>Tổng tiền:</strong> <?php echo $row['tongtien']; ?><br>
+                    <strong>Tên sản phẩm:</strong> <?php echo $row['tensanpham']; ?> - Số lượng: <?php echo $row['soluong']; ?><br>
+                    <strong>Tổng tiền:</strong> <?php echo number_format($row['tongtien']); ?> VND<br>
                     <strong>Trạng thái:</strong>
                     <?php
                     $statusMapping = array(

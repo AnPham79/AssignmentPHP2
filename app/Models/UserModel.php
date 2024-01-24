@@ -102,12 +102,4 @@ class UserModel
 
         return $this->conndb->pdo_query($sql);
     }
-
-    // -------------------------- lấy tất cả tài khoản ---------------------------------
-    public function ViewUserManager()
-    {
-        $sql = "SELECT * FROM taikhoan";
-
-        return $this->conndb->pdo_query($sql);
-    }
 }
