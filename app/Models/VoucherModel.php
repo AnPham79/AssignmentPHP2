@@ -35,6 +35,7 @@ class VoucherModel
             $ngayketthuc = $result['ngayketthuc'];
 
             if ($solansudung <= 0 || $ngayGioHienTai > $ngayketthuc) {
+                $_SESSION['voucher_error'] = "Voucher không còn hoặc đã hết hạn sử dụng.";
                 return false;
             }
 
@@ -46,8 +47,13 @@ class VoucherModel
 
             $_SESSION['ma_voucher'] = $ma_voucher;
 
+            error_log("dùng thàng công");
+            $_SESSION['voucher_sussess'] = "Dùng thành công";
             return $result;
         }
+
+        error_log("Voucher không tồn tại.", 0);
+        $_SESSION['voucher_error'] = "Voucher không tồn tại.";
 
         return false;
     }

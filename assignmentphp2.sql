@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 22, 2024 lúc 04:44 PM
+-- Thời gian đã tạo: Th1 26, 2024 lúc 12:12 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -51,6 +51,40 @@ INSERT INTO `binhluan` (`ma_binhluan`, `tennguoibinhluan`, `ngaybinhluan`, `noid
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `chitietdonhang`
+--
+
+CREATE TABLE `chitietdonhang` (
+  `ma_chitietdonhang` int(11) NOT NULL,
+  `FK_ma_donhang` int(225) NOT NULL,
+  `FK_ma_sanpham` int(225) NOT NULL,
+  `soluong_chitiet` int(225) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chitietdonhang`
+--
+
+INSERT INTO `chitietdonhang` (`ma_chitietdonhang`, `FK_ma_donhang`, `FK_ma_sanpham`, `soluong_chitiet`) VALUES
+(6, 13, 10, 2),
+(7, 13, 24, 1),
+(8, 13, 26, 1),
+(9, 13, 10, 1),
+(10, 13, 10, 1),
+(11, 13, 28, 1),
+(12, 13, 10, 1),
+(13, 13, 13, 1),
+(14, 13, 24, 1),
+(15, 13, 11, 1),
+(16, 13, 14, 1),
+(17, 13, 18, 1),
+(18, 13, 26, 1),
+(19, 13, 10, 1),
+(20, 13, 13, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `danhmuc`
 --
 
@@ -93,12 +127,21 @@ CREATE TABLE `donhang` (
 --
 
 INSERT INTO `donhang` (`ma_donhang`, `tennguoidung`, `diachinguoidung`, `sdtnguoidung`, `emailnguoidung`, `tensanpham`, `soluong`, `tongtien`, `trangthai`, `FK_ma_taikhoan`, `FK_ma_voucher`) VALUES
-(4, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình râu đen , mô hình aokiji đẹp , ', '1 , 1 , ', '11', 'dang-giao-hang', 4, NULL),
-(5, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'mô hình aokiji đẹp , Mô hình râu đen , ', '1 , 1 , ', '11', 'huy-don', 4, NULL),
-(6, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'mô hình aokiji đẹp , ', '1 , ', '1', 'chua-xac-nhan', 4, NULL),
-(9, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Croscodie - OnePiece , ', '1 , ', '15000000', 'huy-don', 4, NULL),
-(10, 'Đoàn Nhật Hiếu', 'hòa do 7', '0927553664', 'hieudn79@gmail.com', 'Mô hình Sasuke - Naruto , ', '1 , ', '21000000', 'chua-xac-nhan', 5, NULL),
-(11, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Renekton - Liên Minh , ', '4 , ', '84000000', 'chua-xac-nhan', 4, NULL);
+(13, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Misfortun - Liên Minh', '6', '126000000', 'dang-chuan-bi', 4, NULL),
+(14, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Renekton - Liên Minh', '1', '21000000', 'dang-giao-hang', 4, NULL),
+(15, 'Đoàn Nhật Hiếu', 'hòa do 7, Nghĩa Phú', '0927553664', 'hieudn79@gmail.com', 'Mô hình Aatrox - Liên minh', '2', '42000000', 'chua-xac-nhan', 5, NULL),
+(16, 'Đoàn Nhật Hiếu', 'hòa do 7, Nghĩa Phú', '0927553664', 'hieudn79@gmail.com', 'mô hình Enel - OnePiece', '4', '40000000', 'dang-chuan-bi', 5, NULL),
+(17, 'Đoàn Nhật Hiếu', 'hòa do 7, Nghĩa Phú', '0927553664', 'hieudn79@gmail.com', 'Mô hình Akali KDA - Liên Minh', '1', '21000000', 'chua-xac-nhan', 5, NULL),
+(18, 'Đoàn Nhật Hiếu', 'hòa do 7, Nghĩa Phú', '0927553664', 'hieudn79@gmail.com', 'Mô hình Guy - Naruto', '1', '1750000', 'chua-xac-nhan', 5, NULL),
+(20, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Renekton - Liên Minh', '1', '21000000', 'chua-xac-nhan', 4, NULL),
+(23, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Misfortun - Liên Minh', '1', '16824000', 'chua-xac-nhan', 4, 3),
+(74, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Guy - Naruto', '1', '1780000', 'chua-xac-nhan', 4, 5),
+(76, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', '', '', '64060000', 'chua-xac-nhan', 4, NULL),
+(85, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'mô hình râu đen - OnePiece', '1', '10030000', 'chua-xac-nhan', 4, 5),
+(86, 'Đoàn Nhật Hiếu', 'hòa do 7, Nghĩa Phú', '0927553664', 'hieudn79@gmail.com', 'mô hình râu đen - OnePiece', '1', '10030000', 'chua-xac-nhan', 5, 5),
+(87, 'Đoàn Nhật Hiếu', 'hòa do 7, Nghĩa Phú', '0927553664', 'hieudn79@gmail.com', 'Mô hình Misfortun - Liên Minh', '1', '21030000', 'chua-xac-nhan', 5, 5),
+(88, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'mô hình râu đen - OnePiece', '1', '10030000', 'chua-xac-nhan', 4, 5),
+(93, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình zambuza - Naruto', '1', '21030000', 'chua-xac-nhan', 4, 5);
 
 -- --------------------------------------------------------
 
@@ -122,27 +165,26 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`ma_sp`, `ten_sp`, `anh_sp`, `gia_sp`, `mota_sp`, `luotxem`, `FK_ma_danhmuc`, `FK_ma_xuatxu`) VALUES
-(9, 'mô hình Enel - OnePiece', 'imagePrd/enel.jpg', 10000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 5, 1, 1),
-(10, 'mô hình râu đen - OnePiece', 'imagePrd/teach.png', 10000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 1, 1, 1),
-(11, 'Mô hình Croscodie - OnePiece', 'imagePrd/croscodie.jpg', 15000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 0, 1, 1),
-(12, 'Mô hình Kuza - OnePiece', 'imagePrd/kuzan.jpg', 15000300, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 4, 1, 2),
-(13, 'Mô hình Kaido - OnePiece', 'imagePrd/kaido.jpg', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 0, 1, 2),
-(14, 'Mô hình Donflmingo - OnePiece', 'imagePrd/dofi.png', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 6, 1, 2),
-(15, 'Mô hình Brook - OnePiece', 'imagePrd/brook.jpg', 17000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 0, 1, 1),
+(9, 'mô hình Enel - OnePiece', 'imagePrd/enel.jpg', 10000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 6, 1, 1),
+(10, 'mô hình râu đen - OnePiece', 'imagePrd/teach.png', 10000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 19, 1, 1),
+(11, 'Mô hình Croscodie - OnePiece', 'imagePrd/croscodie.jpg', 15000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 2, 1, 1),
+(12, 'Mô hình Kuza - OnePiece', 'imagePrd/kuzan.jpg', 15000300, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 7, 1, 2),
+(13, 'Mô hình Kaido - OnePiece', 'imagePrd/kaido.jpg', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 2, 1, 2),
+(14, 'Mô hình Donflmingo - OnePiece', 'imagePrd/dofi.png', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 9, 1, 2),
+(15, 'Mô hình Brook - OnePiece', 'imagePrd/brook.jpg', 17000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 7, 1, 1),
 (16, 'Mô hình Râu Trắng - OnePiece', 'imagePrd/rautrang.png', 24000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 3, 1, 1),
 (17, 'Mô hình Luffy - OnePiece', 'imagePrd/luffi.png', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 2, 1, 1),
-(18, 'Mô hình Sengoku - OnePiece', 'imagePrd/sengoku.png', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 1, 1, 1),
+(18, 'Mô hình Sengoku - OnePiece', 'imagePrd/sengoku.png', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 2, 1, 1),
 (19, 'Mô hình Naruto - Lục Đạo', 'imagePrd/naruto1.jpg', 21000000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 0, 2, 2),
 (20, 'Mô hình Pain - Naruto', 'imagePrd/naruto3.jpg', 2650000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 0, 2, 2),
-(21, 'Mô hình Sasuke - Naruto', 'imagePrd/naruto2.jpg', 21000000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 0, 2, 2),
-(22, 'Mô hình Itachi - Naruto', 'imagePrd/naruto4.jpg', 1450000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 1, 2, 1),
-(23, 'Mô hình Guy - Naruto', 'imagePrd/naruto6.jpg', 1750000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 0, 2, 1),
-(24, 'Mô hình zambuza - Naruto', 'imagePrd/naruto5.jpg', 21000000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 5, 2, 1),
+(21, 'Mô hình Sasuke - Naruto', 'imagePrd/naruto2.jpg', 21000000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 3, 2, 2),
+(22, 'Mô hình Itachi - Naruto', 'imagePrd/naruto4.jpg', 1450000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 2, 2, 1),
+(24, 'Mô hình zambuza - Naruto', 'imagePrd/naruto5.jpg', 21000000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 11, 2, 1),
 (25, 'Mô hình Jiraiza - Naruto', 'imagePrd/product.jpg', 21000000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 0, 2, 2),
-(26, 'Mô hình Renekton - Liên Minh', 'imagePrd/renekton.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 2, 3, 2),
-(27, 'Mô hình Aatrox - Liên minh', 'imagePrd/aatrox.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 0, 3, 1),
-(28, 'Mô hình Misfortun - Liên Minh', 'imagePrd/mis4.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 7, 3, 2),
-(29, 'Mô hình Akali KDA - Liên Minh', 'imagePrd/akali.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 8, 3, 2);
+(26, 'Mô hình Renekton - Liên Minh', 'imagePrd/renekton.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 11, 3, 2),
+(27, 'Mô hình Aatrox - Liên minh', 'imagePrd/aatrox.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 3, 3, 1),
+(28, 'Mô hình Misfortun - Liên Minh', 'imagePrd/mis4.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 16, 3, 2),
+(29, 'Mô hình Akali KDA - Liên Minh', 'imagePrd/akali.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 10, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -167,7 +209,7 @@ CREATE TABLE `taikhoan` (
 
 INSERT INTO `taikhoan` (`ma_tk`, `hovaten`, `sodienthoai`, `diachi`, `anhnguoidung`, `email`, `matkhau`, `quyen`) VALUES
 (1, 'admin', '', '', 'imageUser/QD813740.jpg', 'admin@gmail.com', 'pass', 'admin'),
-(4, 'Phạm Ngọc Bảo An', '0927553664', 'Cam Thành', 'imageUser/412177618_370219155378610_3817338225290412906_n.jpg', 'anpnb79@gmail.com', 'pass', 'user'),
+(4, 'Phạm Ngọc Bảo An', '0927553664', 'Cam Thành', 'imageUser/311526788_1247343795807512_3391778957275628089_n.jpg', 'anpnb79@gmail.com', 'pass', 'user'),
 (5, 'Đoàn Nhật Hiếu', '0927553664', 'hòa do 7, Nghĩa Phú', 'imageUser/373399957_1372076893705929_5146613791926094101_n.jpg', 'hieudn79@gmail.com', 'pass', 'user'),
 (6, 'Nguyễn Thông Thiên', '0927553664', 'Cam Thành', '', 'thiennt68@gmail.com', 'thien123', 'user');
 
@@ -179,18 +221,23 @@ INSERT INTO `taikhoan` (`ma_tk`, `hovaten`, `sodienthoai`, `diachi`, `anhnguoidu
 
 CREATE TABLE `voucher` (
   `ma_voucher` int(11) NOT NULL,
-  `ten_voucher` varchar(225) NOT NULL,
-  `giamtoida` varchar(255) NOT NULL,
-  `ngaybatdau` date NOT NULL,
-  `ngayketthuc` date NOT NULL
+  `ten_voucher` varchar(225) DEFAULT NULL,
+  `solansudung` int(255) DEFAULT 100,
+  `giatri` int(100) DEFAULT NULL,
+  `ngaybatdau` date DEFAULT NULL,
+  `ngayketthuc` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `voucher`
 --
 
-INSERT INTO `voucher` (`ma_voucher`, `ten_voucher`, `giamtoida`, `ngaybatdau`, `ngayketthuc`) VALUES
-(1, 'FREESHIP', '100000', '2024-01-15', '2024-09-07');
+INSERT INTO `voucher` (`ma_voucher`, `ten_voucher`, `solansudung`, `giatri`, `ngaybatdau`, `ngayketthuc`) VALUES
+(1, 'FREESHIP', 86, 0, '2024-01-15', '2024-09-07'),
+(2, 'giam30%', 18, 30, '2024-01-15', '2024-09-07'),
+(3, 'giam20%', 20, 20, '2024-01-15', '2024-09-07'),
+(4, 'giam5%', 98, 5, '2024-01-15', '2024-09-07'),
+(5, NULL, 100, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -222,6 +269,14 @@ ALTER TABLE `binhluan`
   ADD PRIMARY KEY (`ma_binhluan`),
   ADD KEY `FK_ma_sp` (`FK_ma_sp`),
   ADD KEY `FK_ma_taikhoan` (`FK_ma_taikhoan`);
+
+--
+-- Chỉ mục cho bảng `chitietdonhang`
+--
+ALTER TABLE `chitietdonhang`
+  ADD PRIMARY KEY (`ma_chitietdonhang`),
+  ADD KEY `FK_ma_donhang` (`FK_ma_donhang`),
+  ADD KEY `FK_ma_sanpham` (`FK_ma_sanpham`);
 
 --
 -- Chỉ mục cho bảng `danhmuc`
@@ -274,6 +329,12 @@ ALTER TABLE `binhluan`
   MODIFY `ma_binhluan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT cho bảng `chitietdonhang`
+--
+ALTER TABLE `chitietdonhang`
+  MODIFY `ma_chitietdonhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT cho bảng `danhmuc`
 --
 ALTER TABLE `danhmuc`
@@ -283,7 +344,7 @@ ALTER TABLE `danhmuc`
 -- AUTO_INCREMENT cho bảng `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `ma_donhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ma_donhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT cho bảng `sanpham`
@@ -301,7 +362,7 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT cho bảng `voucher`
 --
 ALTER TABLE `voucher`
-  MODIFY `ma_voucher` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ma_voucher` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `xuatxu`
@@ -319,6 +380,13 @@ ALTER TABLE `xuatxu`
 ALTER TABLE `binhluan`
   ADD CONSTRAINT `binhluan_ibfk_1` FOREIGN KEY (`FK_ma_sp`) REFERENCES `sanpham` (`ma_sp`),
   ADD CONSTRAINT `binhluan_ibfk_2` FOREIGN KEY (`FK_ma_taikhoan`) REFERENCES `taikhoan` (`ma_tk`);
+
+--
+-- Các ràng buộc cho bảng `chitietdonhang`
+--
+ALTER TABLE `chitietdonhang`
+  ADD CONSTRAINT `chitietdonhang_ibfk_1` FOREIGN KEY (`FK_ma_donhang`) REFERENCES `donhang` (`ma_donhang`),
+  ADD CONSTRAINT `chitietdonhang_ibfk_2` FOREIGN KEY (`FK_ma_sanpham`) REFERENCES `sanpham` (`ma_sp`);
 
 --
 -- Các ràng buộc cho bảng `donhang`

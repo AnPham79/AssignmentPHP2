@@ -8,6 +8,15 @@
         <p>Email: <?php echo $emailnguoidung; ?></p>
     </div>
 
+    <?php
+        if (isset($_SESSION['voucher_error'])) {
+            echo '<div class="error-message" style="color:red;">' . $_SESSION['voucher_error'] . '</div>';
+            unset($_SESSION['voucher_error']);
+        } elseif (isset($_SESSION['voucher_sussess'])) {
+            echo '<div class="error-message" style="color:green;">' . $_SESSION['voucher_sussess'] . '</div>';
+            unset($_SESSION['voucher_sussess']);
+        }
+    ?>
     <div class="discount-code py-2">
         <span>Nhập mã giảm giá</span>
         <form action="?url=voucher/UseVoucher" method="POST">
@@ -36,6 +45,7 @@
                             <td>
                                 <?php
                                 if (isset($_SESSION['ten_voucher']) && $_SESSION['ten_voucher'] === 'FREESHIP') {
+                                    $item['tienship'] == 0;
                                     echo '0';
                                 } else {
                                     $phiVanChuyen = $item['tienship'];
@@ -44,16 +54,7 @@
                                 ?>
                             </td>
                             <td>
-                                <?php
-                                $thanhToan = $item['tongThanhToan'];
-                                if (isset($_SESSION['gia_tri']) && isset($_SESSION['ten_voucher']) && $_SESSION['ten_voucher'] !== 'FREESHIP') {
-                                    $giamGia = ($thanhToan * $_SESSION['gia_tri']) / 100;
-                                    $thanhToan -= $giamGia;
-                                    echo number_format($thanhToan);
-                                } else {
-                                    echo number_format($thanhToan);
-                                }
-                                ?>
+                                <?php echo number_format($item['gia_sp']) ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -61,9 +62,19 @@
             </table>
         <?php } ?>
     </div>
+    <?php
+    $thanhToan = $item['tongThanhToan'];
+    if (isset($_SESSION['gia_tri']) && isset($_SESSION['ten_voucher']) && $_SESSION['ten_voucher'] !== 'FREESHIP') {
+        $giamGia = ($thanhToan * $_SESSION['gia_tri']) / 100;
+        $thanhToan -= $giamGia;
+        echo 'Tổng tiền:' . ' ' . number_format($thanhToan);
+    } else {
+        echo 'Tổng tiền:' . ' ' . number_format($thanhToan);
+    }
+    ?>
 
-    <?php 
-        $_SESSION['tongtien'] = $thanhToan;
+    <?php
+    $_SESSION['tongtien'] = $thanhToan;
     ?>
 
     <div class="payment-btn payment-btnn">

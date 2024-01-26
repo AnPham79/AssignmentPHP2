@@ -41,16 +41,17 @@ class OrderController extends CoreController
                 $thanhTien = @($gia_sp * $soLuong);
                 $tongTien += $thanhTien;
 
-                if(isset($_SESSION['ten_voucher']) === 'FREESHIP') {
+                if(isset($_SESSION['ten_voucher']) && $_SESSION['ten_voucher'] === 'FREESHIP') {
                     $tienship = 0;
                 } else {
                     $tienship = 30000;
                 }
-
-                $tongTien += $tienship;
+                
+                $tongTien += $tienship;                
 
                 $orderDetails[] = [
                     'ten_sp' => $ten_sp,
+                    'gia_sp' => $gia_sp,
                     'tienship' => $tienship,
                     'soLuong' => $soLuong,
                     'tongThanhToan' => $tongTien,
@@ -81,7 +82,7 @@ class OrderController extends CoreController
             $_SESSION['ma_tk'],
         );
         if ($result === true) {
-            // var_dump($result);
+            var_dump($result);
             header("Location: " . APPURL . '?url=page/index');
         }
     }
