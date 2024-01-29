@@ -21,8 +21,8 @@ class OrderModel
         $sanpham_name = '';
         $sanpham_quantity = '';
         foreach ($products as $ma_sp => $product) {
-            $sanpham_name .= $product['ten_sp'];
-            $sanpham_quantity .=  $product['soluong'];
+            $sanpham_name .= $product['ten_sp'] . ' ' . ',';
+            $sanpham_quantity .=  $product['soluong'] . ' ' . ',';
         }
 
         $ma_voucher = isset($_SESSION['ma_voucher']) ? $_SESSION['ma_voucher'] : 5;
@@ -48,14 +48,6 @@ class OrderModel
             }
 
             $this->sendMail($_SESSION['email']);
-
-            if ($result) {
-                unset($_SESSION['cart']);
-                unset($_SESSION['voucher']);
-                unset($_SESSION['ten_voucher']);
-                unset($_SESSION['gia_tri']);
-                unset($_SESSION['ma_voucher']);
-            }
 
             return $result;
         }
@@ -83,7 +75,7 @@ class OrderModel
             $mail->Port = 465;
 
             // Thiết lập thông tin gửi và nhận
-            $mail->setFrom('phamngocbaoan792004@gmail.com', 'Phạm An'); // Thay bằng thông tin của bạn
+            $mail->setFrom('phamngocbaoan792004@gmail.com', 'Admin Phạm An Paradigm'); // Thay bằng thông tin của bạn
             $mail->addAddress($email);
 
             $mail->isHTML(true);
@@ -117,7 +109,7 @@ class OrderModel
             
                     <p>Cảm ơn bạn đã ủng hộ chúng tôi!</p>
             
-                    <p>Trân trọng,<br>Phạm An Restaurant</p>
+                    <p>Trân trọng,<br>Phạm An Paradigm</p>
                 </div>';
             }
             
@@ -136,6 +128,11 @@ class OrderModel
             $mail->send();
 
             unset($_SESSION['cart']);
+            unset($_SESSION['voucher']);
+            unset($_SESSION['ten_voucher']);
+            unset($_SESSION['gia_tri']);
+            unset($_SESSION['ma_voucher']);
+
             echo '<script>window.location.href = "index.php";</script>';
             
             exit();

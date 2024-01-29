@@ -184,10 +184,6 @@ class ProductController extends CoreController
     // ------------------------ get all orders ----------------
     public function getAllOrderAdmin()
     {
-        $data['maxQuantityProduct'] = $this->product->getProductWithMaxQuantity();
-
-        $data['minQuantityProduct'] = $this->product->getProductWithMinQuantity();
-
         $data['totalquantity'] = $this->product->getTotalQuantityOfAllOrders();
 
         $data['totalPrice'] = $this->product->getTotalPriceOfAllOrders();

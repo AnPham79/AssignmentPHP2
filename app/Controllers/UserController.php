@@ -41,10 +41,14 @@ class UserController extends CoreController
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $result = $this->user->register($_POST['hovaten'], 
-            $_POST['diachi'], $_POST['sodienthoai'], 
-            $_POST['email'], $_FILES['anhnguoidung'],
-            $_POST['matkhau']);
+            $result = $this->user->register(
+                $_POST['hovaten'],
+                $_POST['diachi'],
+                $_POST['sodienthoai'],
+                $_POST['email'],
+                $_FILES['anhnguoidung'],
+                $_POST['matkhau']
+            );
             if ($result) {
                 header("Location:" . APPURL . '?url=user/login');
             }
@@ -89,21 +93,60 @@ class UserController extends CoreController
         }
     }
 
-    // ------------------------ public functions ------------------------
+    // ------------------------ lịch sử mua hàng ------------------------
     public function pageOrderHistory()
     {
+        $this->createModel('user');
         $data['orderHistory'] = $this->user->getAllOrder($_SESSION['ma_tk']);
+
+        foreach ($data['orderHistory'] as $order) {
+            $ma_donhang = $order['ma_donhang'];
+            $data['productDetailInOrder'][$ma_donhang] = $this->user->getProductDetailsByOrder($ma_donhang);
+        }
+
         $this->renderView('page_orderHistory', $data);
     }
 
-    // ------------------------ pro file ---------------------------------
-    public function ViewProfile() {
+
+    // ------------------------ profile ---------------------------------
+    public function ViewProfile()
+    {
         $this->renderView('page_profile');
     }
 
     // ---------------------------- user ----------------------------------------
-    public function ViewUserManager() {
+    public function ViewUserManager()
+    {
         $data['result'] = $this->user->ViewUserManager();
         return $this->renderAdmin('page_UserManager', $data);
+    }
+
+    // --------------------------- liên hệ ------------------------------------
+    public function contact()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $result = $this->user->contact(
+                $_POST['ten_nguoilienhe'],
+                $_POST['email_nguoilienhe'],
+                $_POST['sdt_nguoilienhe'],
+                $_POST['noidung_lienhe'],
+            );
+        }
+    }
+
+    // ---------------------------- quên mật khẩu -------------------------------
+    public function forgotPass()
+    {
+        $this->renderView('forgotPass');
+    }
+
+    // ----------------------------- lấy lại mật khẩu ---------------------------
+    public function getPassword()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $result = $this->user->getPassword(
+                $_POST['email']
+            );
+        }
     }
 }

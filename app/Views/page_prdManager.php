@@ -23,7 +23,7 @@
     <div class="header__admin">
         <div class="header__admin-logo">
             <div class="header__logo">
-                <a href="?url=page/index">
+                <a href="">
                     <i class='bx bxl-unity'></i>
                     <span>PHAMAN</span>
                 </a>

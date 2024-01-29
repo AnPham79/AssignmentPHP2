@@ -71,7 +71,7 @@
     <div class="header__admin">
         <div class="header__admin-logo">
             <div class="header__logo">
-                <a href="?url=page/index">
+                <a href="">
                     <i class='bx bxl-unity'></i>
                     <span>PHAMAN</span>
                 </a>
@@ -115,7 +115,7 @@
         <div class="article-content--option">
             <h1>Thống kê & Đơn hàng</h1>
             <div class="analytics py-5">
-                <div class="analytics__total-order">
+                <div class="analytics__total-order" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; padding: 40px; border-radius: 20px;">
                     <div class="analytics__total-order--icon">
                         <i class='bx bxs-package' style="color: red;"></i>
                     </div>
@@ -124,16 +124,7 @@
                         <p>Đơn hàng</p>
                     </div>
                 </div>
-                <div class="analyrics__product-buy-the--most">
-                    <div class="analyrics__product-buy-the--most--icon">
-                        <i class='bx bx-trending-up' style="color: green;"></i>
-                    </div>
-                    <div class="analyrics__product-buy-the--most-quantity">
-                        <b><?php echo $maxQuantityProduct[0]['tensanpham']; ?></b>
-                        <p><?php echo $maxQuantityProduct[0]['soluong']; ?> Sản phẩm</p>
-                    </div>
-                </div>
-                <div class="analytics__revenue">
+                <div class="analytics__revenue" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; padding: 40px; border-radius: 20px;">
                     <div class="analytics__revenue-icon">
                         <i class='bx bx-money' style="color: rgb(41, 41, 255);"></i>
                     </div>
@@ -142,21 +133,15 @@
                         <p>Tổng doanh thu</p>
                     </div>
                 </div>
-                <div class="analytics__quantity-product">
+                <div class="analytics__quantity-product" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; padding: 40px; border-radius: 20px;">
                     <div class="analytics__quantity-product--icon">
                         <i class='bx bxs-circle-three-quarter' style="color: #ffc107;"></i>
                     </div>
                     <div class="analytics__quantity-product-quantity">
                         <b><?php echo $totalproduct[0]['total_quantity_product']; ?></b>
-                        <p>Sản phẩm được mua</p>
+                        <p>Loại sản phẩm được mua</p>
                     </div>
                 </div>
-            </div>
-            <div class="analytics__achive pt-4">
-                <b>Sản phẩm có số lượng lớn nhất: <?php echo $maxQuantityProduct[0]['tensanpham']; ?></b>
-                <b>Số lượng: <?php echo $maxQuantityProduct[0]['soluong']; ?></b>
-                <b>Sản phẩm có số lượng ít nhất: <?php echo $minQuantityProduct[0]['tensanpham']; ?></b>
-                <b>Số lượng: <?php echo $minQuantityProduct[0]['soluong']; ?></b>
             </div>
             <table border="1" width="100%">
                 <tr>

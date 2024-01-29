@@ -93,26 +93,13 @@
     <div class="container">
         <div class="form-container">
             <div class="form_login">
-                <h1>Đăng nhập</h1>
-                <?php
-                if (isset($_GET['error'])) {
-                    $errorMessage = $_GET['error'];
-                    echo "<p style='color: red;'>$errorMessage</p>";
-                }
-                ?>
-                <form action="" method="POST">
-                    <label for="gmail"><i class='bx bxs-user'></i>Email</label>
+                <h1>Quên mật khẩu</h1>
+                <form action="?url=user/getPassword" method="POST">
+                    <label for="gmail"><i class='bx bxs-user'></i>Nhập email của bạn</label>
                     <input type="email" name="email" placeholder="Nhập email của bạn tại đây." required>
-
-                    <label for="gmail"><i class='bx bxs-lock-alt'></i>Mật khẩu</label>
-                    <input type="password" name="matkhau" placeholder="Nhập mật khẩu của bạn tại đây." required>
-
-                    <a href="?url=user/forgotPass" class="text-center mb-2">Quên mật khẩu</a>
-
-                    <button type="submit">Đăng nhập tài khoản</button>
-                    <span>Hoặc</span>
+                    <i class="mb-2" style="color: gray;">Mật khẩu của bạn sẽ được gửi lại về email</i>
                     <button>
-                        <a href="?url=user/register">Đăng kí tài khoản</a>
+                        Lấy lại mật khẩu
                     </button>
                 </form>
             </div>

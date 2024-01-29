@@ -4,6 +4,7 @@ if (isset($_POST['search'])) {
 } else {
     $search = '';
 }
+
 ?>
 <div class="container my-5">
     <div class="row">
@@ -22,7 +23,7 @@ if (isset($_POST['search'])) {
         </div>
         <div class="article__list-product ps-5 col-md-9">
             <div class="row">
-                <form class="searchForm" action="?url=product/productPage&search=<?php echo ($search) ?>" method="POST">
+                <form class="searchForm" action="?url=product/productPage" method="POST">
                     <input type="search" name="search" value="<?php echo $search ?>" placeholder="Nhập tìm kiếm của bạn">
                     <button type="submit">Tìm kiếm</button>
                 </form>

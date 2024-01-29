@@ -375,26 +375,11 @@ class ProductModel
         LIMIT $limit");
     }
 
-    public function getProductWithMaxQuantity() {
-        return $this->conndb->pdo_query("SELECT tensanpham, soluong
-            FROM donhang 
-            ORDER BY soluong DESC 
-            LIMIT 1");
-    }
-
-    public function getProductWithMinQuantity() {
-        return $this->conndb->pdo_query("SELECT tensanpham, soluong
-            FROM donhang 
-            ORDER BY soluong ASC 
-            LIMIT 1");
-    }
-
     public function getTotalQuantityOfAllOrders() {
         return $this->conndb->pdo_query("SELECT COUNT(*) 
         as total_quantity FROM donhang");
     }
     
-
     public function getTotalPriceOfAllOrders() {
         return $this->conndb->pdo_query("SELECT SUM(tongtien) as
          total_price FROM donhang");

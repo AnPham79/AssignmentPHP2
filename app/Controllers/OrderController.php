@@ -86,4 +86,6 @@ class OrderController extends CoreController
             header("Location: " . APPURL . '?url=page/index');
         }
     }
+
+    
 }
