@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 29, 2024 lúc 10:05 AM
+-- Thời gian đã tạo: Th2 04, 2024 lúc 09:31 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -69,7 +69,8 @@ INSERT INTO `chitietdonhang` (`ma_chitietdonhang`, `FK_ma_donhang`, `FK_ma_sanph
 (26, 108, 26, 1),
 (27, 108, 27, 4),
 (28, 108, 19, 1),
-(29, 108, 26, 1);
+(29, 108, 26, 1),
+(30, 108, 27, 4);
 
 -- --------------------------------------------------------
 
@@ -117,8 +118,9 @@ CREATE TABLE `donhang` (
 
 INSERT INTO `donhang` (`ma_donhang`, `tennguoidung`, `diachinguoidung`, `sdtnguoidung`, `emailnguoidung`, `tensanpham`, `soluong`, `tongtien`, `trangthai`, `FK_ma_taikhoan`, `FK_ma_voucher`) VALUES
 (108, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Renekton - Liên Minh ,Mô hình Aatrox - Liên minh ,', '1 ,4 ,', '105060000', 'chua-xac-nhan', 4, 5),
-(109, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Naruto - Lục Đạo ,', '1 ,', '21030000', 'chua-xac-nhan', 4, 5),
-(110, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Renekton - Liên Minh ,', '1 ,', '21030000', 'chua-xac-nhan', 4, 5);
+(109, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Naruto - Lục Đạo ,', '1 ,', '21030000', 'huy-don', 4, 5),
+(110, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Renekton - Liên Minh ,', '1 ,', '21030000', 'huy-don', 4, 5),
+(111, 'Phạm Ngọc Bảo An', 'Cam Thành', '0927553664', 'anpnb79@gmail.com', 'Mô hình Aatrox - Liên minh ,', '4 ,', '58821000', 'huy-don', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -165,25 +167,24 @@ CREATE TABLE `sanpham` (
 
 INSERT INTO `sanpham` (`ma_sp`, `ten_sp`, `anh_sp`, `gia_sp`, `mota_sp`, `luotxem`, `FK_ma_danhmuc`, `FK_ma_xuatxu`) VALUES
 (9, 'mô hình Enel - OnePiece', 'imagePrd/enel.jpg', 10000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 8, 1, 1),
-(10, 'mô hình râu đen - OnePiece', 'imagePrd/teach.png', 10000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 22, 1, 1),
+(10, 'mô hình râu đen - OnePiece', 'imagePrd/teach.png', 10000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 24, 1, 1),
 (11, 'Mô hình Croscodie - OnePiece', 'imagePrd/croscodie.jpg', 15000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 3, 1, 1),
 (12, 'Mô hình Kuza - OnePiece', 'imagePrd/kuzan.jpg', 15000300, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 7, 1, 2),
 (13, 'Mô hình Kaido - OnePiece', 'imagePrd/kaido.jpg', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 2, 1, 2),
 (14, 'Mô hình Donflmingo - OnePiece', 'imagePrd/dofi.png', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 9, 1, 2),
 (15, 'Mô hình Brook - OnePiece', 'imagePrd/brook.jpg', 17000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 8, 1, 1),
 (16, 'Mô hình Râu Trắng - OnePiece', 'imagePrd/rautrang.png', 24000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 3, 1, 1),
-(17, 'Mô hình Luffy - OnePiece', 'imagePrd/luffi.png', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 2, 1, 1),
+(17, 'Mô hình Luffy - OnePiece', 'imagePrd/luffi.png', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 3, 1, 1),
 (18, 'Mô hình Sengoku - OnePiece', 'imagePrd/sengoku.png', 21000000, 'Độ Chính Xác Cao: Sản phẩm mô hình của chúng tôi được xây dựng trên nền tảng công nghệ tiên tiến nhất, mang lại độ chính xác cao với kết quả đáng tin cậy.  Tích Hợp Trí Tuệ Nhân Tạo (AI): Với sự tích hợp của trí tuệ nhân tạo,', 2, 1, 1),
 (19, 'Mô hình Naruto - Lục Đạo', 'imagePrd/naruto1.jpg', 21000000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 1, 2, 2),
-(20, 'Mô hình Pain - Naruto', 'imagePrd/naruto3.jpg', 2650000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 0, 2, 2),
+(20, 'Mô hình Pain - Naruto', 'imagePrd/naruto3.jpg', 2650000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 1, 2, 2),
 (21, 'Mô hình Sasuke - Naruto', 'imagePrd/naruto2.jpg', 21000000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 3, 2, 2),
 (22, 'Mô hình Itachi - Naruto', 'imagePrd/naruto4.jpg', 1450000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 3, 2, 1),
 (24, 'Mô hình zambuza - Naruto', 'imagePrd/naruto5.jpg', 21000000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 13, 2, 1),
 (25, 'Mô hình Jiraiza - Naruto', 'imagePrd/product.jpg', 21000000, 'Dòng mô hình Naruto Uzumaki là một kiệt tác nghệ thuật, tái tạo chân thực nhân vật chính của loạt truyện. Bạn sẽ đắm chìm trong chi tiết tinh xảo, từ áo đen chất kỳ đến khuôn mặt đầy tính cách với đôi mắt sáng ngời. Được làm ', 0, 2, 2),
 (26, 'Mô hình Renekton - Liên Minh', 'imagePrd/renekton.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 16, 3, 2),
-(27, 'Mô hình Aatrox - Liên minh', 'imagePrd/aatrox.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 4, 3, 1),
-(28, 'Mô hình Misfortun - Liên Minh', 'imagePrd/mis4.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 16, 3, 2),
-(29, 'Mô hình Akali KDA - Liên Minh', 'imagePrd/akali.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 10, 3, 2);
+(27, 'Mô hình Aatrox - Liên minh', 'imagePrd/aatrox.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 6, 3, 1),
+(28, 'Mô hình Misfortun - Liên Minh', 'imagePrd/mis4.jpg', 21000000, 'Chào mừng các tín đồ Liên Minh Chiến Binh! Bạn đã bước vào một không gian độc đáo và phong cách, nơi mà chúng tôi tự hào giới thiệu bộ sưu tập mô hình Liên Minh với sự đa dạng về nhân vật và chi tiết chân thực. Hãy khám phá n', 16, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -233,7 +234,7 @@ CREATE TABLE `voucher` (
 
 INSERT INTO `voucher` (`ma_voucher`, `ten_voucher`, `solansudung`, `giatri`, `ngaybatdau`, `ngayketthuc`) VALUES
 (1, 'FREESHIP', 84, 0, '2024-01-15', '2024-09-07'),
-(2, 'giam30%', 18, 30, '2024-01-15', '2024-09-07'),
+(2, 'giam30%', 16, 30, '2024-01-15', '2024-09-07'),
 (3, 'giam20%', 20, 20, '2024-01-15', '2024-09-07'),
 (4, 'giam5%', 98, 5, '2024-01-15', '2024-09-07'),
 (5, NULL, 100, NULL, NULL, NULL);
@@ -337,7 +338,7 @@ ALTER TABLE `binhluan`
 -- AUTO_INCREMENT cho bảng `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
-  MODIFY `ma_chitietdonhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ma_chitietdonhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `danhmuc`
@@ -349,7 +350,7 @@ ALTER TABLE `danhmuc`
 -- AUTO_INCREMENT cho bảng `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `ma_donhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `ma_donhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT cho bảng `lienhe`

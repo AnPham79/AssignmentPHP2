@@ -99,14 +99,10 @@ class UserController extends CoreController
         $this->createModel('user');
         $data['orderHistory'] = $this->user->getAllOrder($_SESSION['ma_tk']);
 
-        foreach ($data['orderHistory'] as $order) {
-            $ma_donhang = $order['ma_donhang'];
-            $data['productDetailInOrder'][$ma_donhang] = $this->user->getProductDetailsByOrder($ma_donhang);
-        }
+        // var_dump($data['orderHistory']);
 
         $this->renderView('page_orderHistory', $data);
     }
-
 
     // ------------------------ profile ---------------------------------
     public function ViewProfile()

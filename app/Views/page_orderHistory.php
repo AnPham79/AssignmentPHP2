@@ -72,13 +72,8 @@
                     <strong>Địa chỉ:</strong> <?php echo $row['diachinguoidung']; ?><br>
                     <strong>Số điện thoại:</strong> <?php echo $row['sdtnguoidung']; ?><br>
                     <strong>Email:</strong> <?php echo $row['emailnguoidung']; ?><br>
-
-                    <?php
-                    $productDetails = $productDetailInOrder[$row['ma_donhang']];
-                    foreach ($productDetails as $product) : ?>
-                        <strong>Tên sản phẩm:</strong> <?php echo $product['FK_ten_sanpham']; ?> - Số lượng: <?php echo $product['soluong_chitiet']; ?><br>
-                    <?php endforeach; ?>
-
+                    <strong>Tên sản phẩm:</strong> <?php echo $row['tensanpham']; ?><br>
+                        <strong>Số lượng:</strong> <?php echo $row['soluong']; ?><br>
                     <strong>Tổng tiền:</strong> <?php echo number_format($row['tongtien']); ?> VND<br>
                     <strong>Trạng thái:</strong>
                     <?php

@@ -308,10 +308,11 @@ class UserModel
         $sql = "SELECT chitietdonhang.soluong_chitiet, sanpham.*, sanpham.ten_sp as FK_ten_sanpham
                 FROM chitietdonhang
                 JOIN sanpham ON chitietdonhang.FK_ma_sanpham = sanpham.ma_sp
-                WHERE FK_ma_donhang = '$ma_donhang'";
-
+                WHERE chitietdonhang.FK_ma_donhang = '$ma_donhang'";
+    
         $result = $this->conndb->pdo_query($sql);
-
+    
         return $result;
     }
+    
 }
