@@ -1,4 +1,5 @@
-Đây là web bán mô hình được code bằng PHP hướng đối tượng
+Đây là web bán mô hình được code bằng PHP hướng đối tượng với mô hình MVC
+-------------------------------------------------------------------------
 Mô tả chức năng cơ bản: 
 - Đăng kí / Đăng nhập / đăng xuất.
 - Giỏ hàng.
@@ -10,6 +11,7 @@ Mô tả chức năng cơ bản:
 - Bình luận sản phẩm
 - Phân trang / tìm kiếm / danh mục.
 - Lịch sử mua hàng ( theo giỏi đơn hàng, hủy đơn ).
+---------------------------------------------------------
 Mô tả chức năng admin:
 - Thêm sửa xóa sản phẩm.
 - Quản lí danh mục.
